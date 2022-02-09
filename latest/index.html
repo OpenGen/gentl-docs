@@ -68,21 +68,62 @@ $(function() {
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="autotoc_md0"></a>
 Concepts</h1>
-<h1><a class="anchor" id="autotoc_md1"></a>
-Functionality</h1>
+<h2><a class="anchor" id="autotoc_md1"></a>
+GenerativeFunction</h2>
+<p>An object whose call operator <code>()</code> returns a BoundGenerativeFunction.</p>
 <h2><a class="anchor" id="autotoc_md2"></a>
+BoundGenerativeFunction</h2>
+<p>Member functions:</p>
+<ul>
+<li><code>simulate</code> (two variants)</li>
+<li><code>generate</code> (two variants)</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Trace</h2>
+<p>A possible sample from the probability distribution of a BoundGenerativeFunction.</p>
+<p>Member functions:</p>
+<ul>
+<li><code>update</code></li>
+<li><code>revert</code></li>
+<li><code>fork</code></li>
+<li><code>choices</code></li>
+<li><code>score</code></li>
+<li><code>parameter_gradient</code></li>
+<li><code>choice_gradient</code></li>
+</ul>
+<h2><a class="anchor" id="autotoc_md4"></a>
+ChoiceBuffer</h2>
+<p>Storage for the values of random choices.</p>
+<h2><a class="anchor" id="autotoc_md5"></a>
+ChoiceSelection</h2>
+<p>A set of random choices.</p>
+<h2><a class="anchor" id="autotoc_md6"></a>
+Change</h2>
+<p>A change to the input or output of a generative function.</p>
+<h2><a class="anchor" id="autotoc_md7"></a>
+ParameterStore</h2>
+<p>Storage for parameters that support gradient-based learning.</p>
+<h2><a class="anchor" id="autotoc_md8"></a>
+ParameterGradientAccumulator</h2>
+<p>Member functions:</p>
+<ul>
+<li><code>update_gradient</code></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md9"></a>
+Functionality</h1>
+<h2><a class="anchor" id="autotoc_md10"></a>
 MCMC</h2>
 <ul>
 <li><a class="el" href="namespacegentl_1_1mcmc.html#a50fe1000f2f38061b100d715ca21acee">gentl::mcmc::mh</a></li>
 <li><a class="el" href="namespacegentl_1_1mcmc.html#addfb4013c964b4b717deaf1c13163e7a">gentl::mcmc::hmc</a></li>
 <li><a class="el" href="namespacegentl_1_1mcmc.html#a5411d92e7d3ef8a1fba2f45e104863c4">gentl::mcmc::mala</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md3"></a>
+<h2><a class="anchor" id="autotoc_md11"></a>
 SMC</h2>
 <ul>
 <li><a class="el" href="classgentl_1_1smc_1_1ParticleSystem.html">gentl::smc::ParticleSystem</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md4"></a>
+<h2><a class="anchor" id="autotoc_md12"></a>
 Maximum likelihood</h2>
 <ul>
 <li><a class="el" href="namespacegentl_1_1sgd.html#ae1d745bdc12923e8a643eb1ed10de745">gentl::sgd::train_supervised</a> </li>
