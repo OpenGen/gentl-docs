@@ -75,14 +75,16 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &lt;cmath&gt;</code><br />
 <code>#include &lt;random&gt;</code><br />
+<code>#include &lt;gentl/types.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for mcmc.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="mcmc_8h__incl.png" border="0" usemap="#gentl_2inference_2mcmc_8h" alt=""/></div>
 <map name="gentl_2inference_2mcmc_8h" id="gentl_2inference_2mcmc_8h">
-<area shape="rect" title=" " alt="" coords="5,5,181,32"/>
-<area shape="rect" title=" " alt="" coords="17,80,79,107"/>
-<area shape="rect" title=" " alt="" coords="104,80,176,107"/>
+<area shape="rect" title=" " alt="" coords="41,5,217,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,68,107"/>
+<area shape="rect" title=" " alt="" coords="93,80,165,107"/>
+<area shape="rect" title=" " alt="" coords="189,80,295,107"/>
 </map>
 </div>
 </div>
@@ -99,9 +101,9 @@ Namespaces</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a71d9e4a384b8e8b8be193a4e69e7ab30"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#a71d9e4a384b8e8b8be193a4e69e7ab30">gentl::mcmc::mh_accept_prob</a> (double model_log_weight, double proposal_forward_score, double proposal_backward_score)</td></tr>
 <tr class="separator:a71d9e4a384b8e8b8be193a4e69e7ab30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50fe1000f2f38061b100d715ca21acee"><td class="memTemplParams" colspan="2">template&lt;typename TraceType , typename ProposalTraceType , typename MakeProposalType , typename ProposalParametersType , typename RNGType &gt; </td></tr>
-<tr class="memitem:a50fe1000f2f38061b100d715ca21acee"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#a50fe1000f2f38061b100d715ca21acee">gentl::mcmc::mh</a> (TraceType &amp;model_trace, const MakeProposalType &amp;make_proposal, ProposalParametersType &amp;proposal_params, RNGType &amp;rng, ProposalTraceType &amp;proposal_trace, bool prepare_for_gradient=false)</td></tr>
-<tr class="separator:a50fe1000f2f38061b100d715ca21acee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab296b1fc356e318433d3b2dccf657338"><td class="memTemplParams" colspan="2">template&lt;typename TraceType , typename ProposalTraceType , typename MakeProposalType , typename ProposalParametersType , typename RNGType &gt; </td></tr>
+<tr class="memitem:ab296b1fc356e318433d3b2dccf657338"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#ab296b1fc356e318433d3b2dccf657338">gentl::mcmc::mh</a> (TraceType &amp;model_trace, const MakeProposalType &amp;make_proposal, ProposalParametersType &amp;proposal_params, RNGType &amp;rng, ProposalTraceType &amp;proposal_trace, bool precompute_gradient=false)</td></tr>
+<tr class="separator:ab296b1fc356e318433d3b2dccf657338"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44b9ec2e4c1a8ecd29da4af3c846344f"><td class="memTemplParams" colspan="2">template&lt;typename TraceType , typename MakeProposalType , typename ProposalParametersType , typename RNGType &gt; </td></tr>
 <tr class="memitem:a44b9ec2e4c1a8ecd29da4af3c846344f"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#a44b9ec2e4c1a8ecd29da4af3c846344f">gentl::mcmc::mh_chain</a> (TraceType &amp;model_trace, const MakeProposalType &amp;make_proposal, ProposalParametersType &amp;proposal_params, size_t num_steps, RNGType &amp;rng)</td></tr>
 <tr class="separator:a44b9ec2e4c1a8ecd29da4af3c846344f"><td class="memSeparator" colspan="2">&#160;</td></tr>

@@ -77,9 +77,9 @@ $(function() {
 Functions</h2></td></tr>
 <tr class="memitem:a71d9e4a384b8e8b8be193a4e69e7ab30"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#a71d9e4a384b8e8b8be193a4e69e7ab30">mh_accept_prob</a> (double model_log_weight, double proposal_forward_score, double proposal_backward_score)</td></tr>
 <tr class="separator:a71d9e4a384b8e8b8be193a4e69e7ab30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50fe1000f2f38061b100d715ca21acee"><td class="memTemplParams" colspan="2">template&lt;typename TraceType , typename ProposalTraceType , typename MakeProposalType , typename ProposalParametersType , typename RNGType &gt; </td></tr>
-<tr class="memitem:a50fe1000f2f38061b100d715ca21acee"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#a50fe1000f2f38061b100d715ca21acee">mh</a> (TraceType &amp;model_trace, const MakeProposalType &amp;make_proposal, ProposalParametersType &amp;proposal_params, RNGType &amp;rng, ProposalTraceType &amp;proposal_trace, bool prepare_for_gradient=false)</td></tr>
-<tr class="separator:a50fe1000f2f38061b100d715ca21acee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab296b1fc356e318433d3b2dccf657338"><td class="memTemplParams" colspan="2">template&lt;typename TraceType , typename ProposalTraceType , typename MakeProposalType , typename ProposalParametersType , typename RNGType &gt; </td></tr>
+<tr class="memitem:ab296b1fc356e318433d3b2dccf657338"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#ab296b1fc356e318433d3b2dccf657338">mh</a> (TraceType &amp;model_trace, const MakeProposalType &amp;make_proposal, ProposalParametersType &amp;proposal_params, RNGType &amp;rng, ProposalTraceType &amp;proposal_trace, bool precompute_gradient=false)</td></tr>
+<tr class="separator:ab296b1fc356e318433d3b2dccf657338"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44b9ec2e4c1a8ecd29da4af3c846344f"><td class="memTemplParams" colspan="2">template&lt;typename TraceType , typename MakeProposalType , typename ProposalParametersType , typename RNGType &gt; </td></tr>
 <tr class="memitem:a44b9ec2e4c1a8ecd29da4af3c846344f"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#a44b9ec2e4c1a8ecd29da4af3c846344f">mh_chain</a> (TraceType &amp;model_trace, const MakeProposalType &amp;make_proposal, ProposalParametersType &amp;proposal_params, size_t num_steps, RNGType &amp;rng)</td></tr>
 <tr class="separator:a44b9ec2e4c1a8ecd29da4af3c846344f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -333,8 +333,8 @@ template&lt;typename ChoiceBuffer , typename RNGType &gt; </div>
 
 </div>
 </div>
-<a id="a50fe1000f2f38061b100d715ca21acee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50fe1000f2f38061b100d715ca21acee">&#9670;&nbsp;</a></span>mh()</h2>
+<a id="ab296b1fc356e318433d3b2dccf657338"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab296b1fc356e318433d3b2dccf657338">&#9670;&nbsp;</a></span>mh()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -375,7 +375,7 @@ template&lt;typename TraceType , typename ProposalTraceType , typename MakePropo
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>prepare_for_gradient</em> = <code>false</code>&#160;</td>
+          <td class="paramname"><em>precompute_gradient</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>

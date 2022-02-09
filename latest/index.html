@@ -79,30 +79,36 @@ BoundGenerativeFunction</h2>
 <p>An object that is capable of generating a Trace, given a random number generator (RNG), a ParameterStore object, and optionally a ChoiceBuffer that describes constraints that the resulting Trace should satisfy.</p>
 <p>There are two template member functions that are used to obtain Traces:</p>
 <p>Sample from the joint distribution, and optionally compute and cache gradients with respect to trainable parameters. </p><div class="fragment"><div class="line">template &lt;typename RNG, typename ParameterStore&gt;</div>
-<div class="line">std::unique_ptr&lt;Trace&gt; simulate(RNG&amp;, ParameterStore&amp;, bool gradient) const</div>
-</div><!-- fragment --><p>Sample from an alternate distribution, and return an importance weight accounting for the difference, and optionally compute and cache gradients with respect to trainable parameters. </p><div class="fragment"><div class="line">template &lt;typename RNG, typename ParameterStore&gt;</div>
-<div class="line">std::pair&lt;std::unique_ptr&lt;Trace&gt;, double&gt; generate(RNG&amp;, ParameterStore&amp;, const ChoiceBuffer&amp;, bool gradient) const</div>
-</div><!-- fragment --><p>There are two variants that write into a reference to a trace object instead of returning a new trace object:</p>
+<div class="line">std::unique_ptr&lt;Trace&gt; simulate(RNG&amp;, ParameterStore&amp;, const SimulateOptions&amp;) const</div>
+</div><!-- fragment --><p>See gentl::SimulateOptions.</p>
+<p>Sample from an alternate distribution, and return an importance weight accounting for the difference, and optionally compute and cache gradients with respect to trainable parameters. </p><div class="fragment"><div class="line">template &lt;typename RNG, typename ParameterStore&gt;</div>
+<div class="line">std::pair&lt;std::unique_ptr&lt;Trace&gt;, double&gt; generate(RNG&amp;, ParameterStore&amp;, const ChoiceBuffer&amp;, const GenerateOptions&amp;) const</div>
+</div><!-- fragment --><p>See gentl::GenerateOptions.</p>
+<p>There are two variants that write into a reference to a trace object instead of returning a new trace object:</p>
 <div class="fragment"><div class="line">template &lt;typename RNG, typename ParameterStore&gt;</div>
-<div class="line">void simulate(Trace&amp;, RNG&amp;, ParameterStore&amp;, bool gradient) const</div>
-</div><!-- fragment --><div class="fragment"><div class="line">template &lt;typename RNG, typename ParameterStore&gt;</div>
-<div class="line">double generate(Trace&amp;, RNG&amp;, ParameterStore&amp;, const ChoiceBuffer&amp;, bool gradient) const</div>
+<div class="line">void simulate(RNG&amp;, ParameterStore&amp;, const SimulateOptions&amp;, Trace&amp;) const</div>
+</div><!-- fragment --><p>Equivalent to <code>generate</code> but does not need to return a trace: </p><div class="fragment"><div class="line">template &lt;typename RNG, typename ParameterStore&gt;</div>
+<div class="line">double assess(RNG&amp;, ParameterStore&amp;, const ChoiceBuffer&amp;) const</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md3"></a>
 Trace</h2>
 <p>A possible sample from the probability distribution of a BoundGenerativeFunction.</p>
 <p>Traces typically do not have public constructors, and are instead obtained from the <code>simulate</code> and <code>generate</code> functions of a BoundGenerativeFunction.</p>
 <p>Member functions:</p>
 <p>Modify the state of a trace: </p><div class="fragment"><div class="line">template &lt;typename RNG&gt;</div>
-<div class="line">std::tuple&lt;double, const BackwardChoiceBuffer&amp;, const ValueChange&amp;&gt; update(</div>
-<div class="line">        RNG&amp;, const InputChange&amp;, const ForwardChoiceBuffer&amp;, bool save, bool gradient)</div>
-</div><!-- fragment --><p>Note that <code>BackwardChoiceBuffer</code> and <code>ValueChange</code> references returned by <code>update</code> will become undefined after the next call to <code>update</code> or <code>revert</code> (below) or <code>fork</code> (below).</p>
-<p>Revert to the state before the most recent <code>update</code> call for which the <code>save</code> flag is set. </p><div class="fragment"><div class="line">void revert()</div>
+<div class="line">double update(RNG&amp;, const InputChange&amp;, const ForwardChoiceBuffer&amp;, const UpdateOptions&amp;)</div>
+</div><!-- fragment --><p>See gentl::UpdateOptions. Note that <code>BackwardChoiceBuffer</code> and <code>ValueChange</code> references returned by <code>update</code> will become undefined after the next call to <code>update</code> or <code>revert</code> (below) or <code>fork</code> (below).</p>
+<p>Return the constraints, that, if passed to <code>update</code>, would revert the most recent <code>update</code> (only valid after a call to <code>update</code> and before a call to <code>revert</code> or <code>fork</code>): </p><div class="fragment"><div class="line">const ChoiceBuffer&amp; backward_constraints()</div>
+</div><!-- fragment --><p>Return an object representing the change in return value. </p><div class="fragment"><div class="line">const ValueChange&amp; return_value_change()</div>
+</div><!-- fragment --><p>Revert to the state before the most recent <code>update</code> call for which the <code>save</code> flag is set. </p><div class="fragment"><div class="line">void revert()</div>
 </div><!-- fragment --><p>Return a new trace that is observationally independent from <code>this</code>: </p><div class="fragment"><div class="line">std::unique_ptr&lt;Trace&gt; fork()</div>
 </div><!-- fragment --><p>Return a view into the value of some subset of the random choices in the trace: </p><div class="fragment"><div class="line">const ChoiceBuffer&amp; choices(const Selection&amp;) const</div>
-</div><!-- fragment --><p>Return the log joint probability density: </p><div class="fragment"><div class="line">double score() const</div>
-</div><!-- fragment --><p>Return the return value of the trace, which is in general different from the choices. </p><div class="fragment"><div class="line">Output get_return_value() const</div>
-</div><!-- fragment --><p>Compute the gradient of the log joint density with respect to the parameters, and accumulate this gradient into the given GradientAccumulator object. </p><div class="fragment"><div class="line">InputGradient parameter_gradient(const OutputGradient&amp;, double scaler, GradientAccumulator&amp;)</div>
-</div><!-- fragment --><p>Compute the gradient of the log joint density with respect to the choices, and return it&gt; </p><div class="fragment"><div class="line">std::pair&lt;InputGradient, const ChoiceBuffer&amp;&gt; choice_gradient(const Selection&amp;, const OutputGradient&amp;)</div>
+</div><!-- fragment --><p>NOTE: <a class="el" href="namespacegentl_1_1mcmc.html#ab296b1fc356e318433d3b2dccf657338">gentl::mcmc::mh</a> requires that the proposal implement <code>choices(const gentl::selections:all)</code>.</p>
+<p>Return the log joint probability density: </p><div class="fragment"><div class="line">double score() const</div>
+</div><!-- fragment --><p>Return the return value of the trace, which is in general different from the choices. </p><div class="fragment"><div class="line">Output return_value() const</div>
+</div><!-- fragment --><p>Compute the gradient of the log joint density with respect to the parameters, and accumulate this gradient into the given GradientAccumulator object. </p><div class="fragment"><div class="line">void parameter_gradient(GradientAccumulator&amp;, double scaler=1.0)</div>
+</div><!-- fragment --><p>Compositional variant: </p><div class="fragment"><div class="line">InputGradient parameter_gradient(GradientAccumulator&amp;, const OutputGradient&amp;, double scaler=1.0)</div>
+</div><!-- fragment --><p>Return the gradient of the log joint density with respect to the choices: </p><div class="fragment"><div class="line">const ChoiceBuffer&amp; choice_gradient(const Selection&amp;)</div>
+</div><!-- fragment --><p>Compositional variant: </p><div class="fragment"><div class="line">std::pair&lt;InputGradient, const ChoiceBuffer&amp;&gt; choice_gradient(const Selection&amp;, const OutputGradient&amp;)</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md4"></a>
 ChoiceBuffer</h2>
 <p>Stores the values of random choices.</p>
@@ -135,7 +141,7 @@ Inference and Learning</h2>
 <h3><a class="anchor" id="autotoc_md13"></a>
 Markov chain Monte Carlo (MCMC)</h3>
 <ul>
-<li><a class="el" href="namespacegentl_1_1mcmc.html#a50fe1000f2f38061b100d715ca21acee">gentl::mcmc::mh</a></li>
+<li><a class="el" href="namespacegentl_1_1mcmc.html#ab296b1fc356e318433d3b2dccf657338">gentl::mcmc::mh</a></li>
 <li><a class="el" href="namespacegentl_1_1mcmc.html#addfb4013c964b4b717deaf1c13163e7a">gentl::mcmc::hmc</a></li>
 <li><a class="el" href="namespacegentl_1_1mcmc.html#a5411d92e7d3ef8a1fba2f45e104863c4">gentl::mcmc::mala</a></li>
 </ul>
