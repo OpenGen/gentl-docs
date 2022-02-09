@@ -8,5 +8,6 @@ var searchData=
   ['mcmc_13',['mcmc',['../namespacegentl_1_1mcmc.html',1,'gentl']]],
   ['randutils_14',['randutils',['../namespacegentl_1_1randutils.html',1,'gentl']]],
   ['sgd_15',['sgd',['../namespacegentl_1_1sgd.html',1,'gentl']]],
-  ['smc_16',['smc',['../namespacegentl_1_1smc.html',1,'gentl']]]
+  ['sir_16',['sir',['../namespacegentl_1_1sir.html',1,'gentl']]],
+  ['smc_17',['smc',['../namespacegentl_1_1smc.html',1,'gentl']]]
 ];

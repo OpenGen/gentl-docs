@@ -76,36 +76,41 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;random&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="mathutils_8h.html">gentl/util/mathutils.h</a>&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> TraceType, <span class="keyword">typename</span> ModelType, <span class="keyword">typename</span> ParametersType, <span class="keyword">typename</span> Constra<span class="keywordtype">int</span>sType, <span class="keyword">typename</span> RNGType&gt;</div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="sir_8h.html#a08a5f0fa0694e6783e17f94b813ee7bb">    8</a></span>&#160;std::pair&lt;std::unique_ptr&lt;TraceType&gt;,<span class="keywordtype">double</span>&gt; <a class="code" href="sir_8h.html#a08a5f0fa0694e6783e17f94b813ee7bb">rolling_importance_resampling</a>(</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        <span class="keyword">const</span> ModelType&amp; model, ParametersType&amp; parameters,</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        <span class="keyword">const</span> ConstraintsType&amp; constraints, RNGType&amp; rng,</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <span class="keywordtype">size_t</span> num_particles) {</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordflow">if</span> (num_particles == 0)</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keywordflow">throw</span> std::logic_error(<span class="stringliteral">&quot;num_particles == 0&quot;</span>);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">auto</span> [trace_ptr, log_total_weight] = model.generate(constraints, rng, parameters, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="comment">// generate another trace that will be used to generate all future traces in-place</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">auto</span> [candidate_trace_ptr, unused] = model.generate(constraints, rng, parameters, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; num_particles; i++) {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="comment">// overwrite candidate trace</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keywordtype">double</span> log_weight_increment = model.generate(*candidate_trace_ptr, constraints, rng, parameters, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        log_total_weight = <a class="code" href="namespacegentl_1_1mathutils.html#a32a33f7b851ee042f2dc556c343093c7">gentl::mathutils::logsumexp</a>(log_total_weight, log_weight_increment);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordtype">double</span> prob_replace = std::exp(log_weight_increment - log_total_weight);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        std::bernoulli_distribution dist{prob_replace};</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordflow">if</span> (dist(rng)) {</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="comment">// swap the pointers</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            std::swap(trace_ptr, candidate_trace_ptr);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        }</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    }</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">double</span> log_ml_estimate = log_total_weight - std::log(num_particles);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">return</span> {std::move(trace_ptr), log_ml_estimate};</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;}</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif //GENTL_SIR_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="namespacegentl_1_1sir.html">    7</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacegentl_1_1sir.html">gentl::sir</a> {</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> TraceType, <span class="keyword">typename</span> ModelType, <span class="keyword">typename</span> ParametersType, <span class="keyword">typename</span> Constra<span class="keywordtype">int</span>sType, <span class="keyword">typename</span> RNGType&gt;</div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="namespacegentl_1_1sir.html#a222b5d078c57018ed0a6074f9b827c9c">   10</a></span>&#160;std::pair&lt;std::unique_ptr&lt;TraceType&gt;,<span class="keywordtype">double</span>&gt; <a class="code" href="namespacegentl_1_1sir.html#a222b5d078c57018ed0a6074f9b827c9c">rolling_importance_resampling</a>(</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <span class="keyword">const</span> ModelType&amp; model, ParametersType&amp; parameters,</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <span class="keyword">const</span> ConstraintsType&amp; constraints, RNGType&amp; rng,</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keywordtype">size_t</span> num_particles) {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordflow">if</span> (num_particles == 0)</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keywordflow">throw</span> std::logic_error(<span class="stringliteral">&quot;num_particles == 0&quot;</span>);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">auto</span> [trace_ptr, log_total_weight] = model.generate(constraints, rng, parameters, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="comment">// generate another trace that will be used to generate all future traces in-place</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">auto</span> [candidate_trace_ptr, unused] = model.generate(constraints, rng, parameters, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; num_particles; i++) {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="comment">// overwrite candidate trace</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordtype">double</span> log_weight_increment = model.generate(*candidate_trace_ptr, constraints, rng, parameters, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        log_total_weight = <a class="code" href="namespacegentl_1_1mathutils.html#a32a33f7b851ee042f2dc556c343093c7">gentl::mathutils::logsumexp</a>(log_total_weight, log_weight_increment);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordtype">double</span> prob_replace = std::exp(log_weight_increment - log_total_weight);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        std::bernoulli_distribution dist{prob_replace};</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordflow">if</span> (dist(rng)) {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <span class="comment">// swap the pointers</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            std::swap(trace_ptr, candidate_trace_ptr);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        }</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    }</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">double</span> log_ml_estimate = log_total_weight - std::log(num_particles);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">return</span> {std::move(trace_ptr), log_ml_estimate};</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#endif //GENTL_SIR_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="anamespacegentl_1_1mathutils_html_a32a33f7b851ee042f2dc556c343093c7"><div class="ttname"><a href="namespacegentl_1_1mathutils.html#a32a33f7b851ee042f2dc556c343093c7">gentl::mathutils::logsumexp</a></div><div class="ttdeci">T logsumexp(const std::vector&lt; T &gt; &amp;values)</div><div class="ttdef"><b>Definition:</b> mathutils.h:7</div></div>
 <div class="ttc" id="amathutils_8h_html"><div class="ttname"><a href="mathutils_8h.html">mathutils.h</a></div></div>
-<div class="ttc" id="asir_8h_html_a08a5f0fa0694e6783e17f94b813ee7bb"><div class="ttname"><a href="sir_8h.html#a08a5f0fa0694e6783e17f94b813ee7bb">rolling_importance_resampling</a></div><div class="ttdeci">std::pair&lt; std::unique_ptr&lt; TraceType &gt;, double &gt; rolling_importance_resampling(const ModelType &amp;model, ParametersType &amp;parameters, const ConstraintsType &amp;constraints, RNGType &amp;rng, size_t num_particles)</div><div class="ttdef"><b>Definition:</b> sir.h:8</div></div>
+<div class="ttc" id="anamespacegentl_1_1sir_html_a222b5d078c57018ed0a6074f9b827c9c"><div class="ttname"><a href="namespacegentl_1_1sir.html#a222b5d078c57018ed0a6074f9b827c9c">gentl::sir::rolling_importance_resampling</a></div><div class="ttdeci">std::pair&lt; std::unique_ptr&lt; TraceType &gt;, double &gt; rolling_importance_resampling(const ModelType &amp;model, ParametersType &amp;parameters, const ConstraintsType &amp;constraints, RNGType &amp;rng, size_t num_particles)</div><div class="ttdef"><b>Definition:</b> sir.h:10</div></div>
+<div class="ttc" id="anamespacegentl_1_1sir_html"><div class="ttname"><a href="namespacegentl_1_1sir.html">gentl::sir</a></div><div class="ttdef"><b>Definition:</b> sir.h:7</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
