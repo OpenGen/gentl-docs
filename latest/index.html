@@ -72,31 +72,39 @@ Concepts</h1>
 <h2><a class="anchor" id="autotoc_md1"></a>
 GenerativeFunction</h2>
 <p>An object whose call operator <code>()</code> returns a BoundGenerativeFunction.</p>
+<p>The input to the call is called the Input and related to the InputGradient and InputChange types.</p>
 <h2><a class="anchor" id="autotoc_md2"></a>
 BoundGenerativeFunction</h2>
 <p>An object that is capable of generating a Trace, given a random number generator, a parameter object, and optionally a ChoiceBuffer that describes constraints that the resulting Trace should satisfy.</p>
-<p>There are two member functions that are used to generate Traces:</p>
-<ul>
-<li><code>simulate</code> (two variants)</li>
-<li><code>generate</code> (two variants)</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md3"></a>
+<p>There are two template member functions that are used to obtain Traces:</p>
+<div class="fragment"><div class="line">template &lt;typename RNG, typename Parameters&gt;</div>
+<div class="line">std::unique_ptr&lt;Trace&gt; simulate(RNG&amp; rng, Parameters&amp;, bool gradient) const</div>
+</div><!-- fragment --><div class="fragment"><div class="line">template &lt;typename RNG, typename Parameters&gt;</div>
+<div class="line">std::pair&lt;std::unique_ptr&lt;Trace&gt;, double&gt; generate(RNG&amp; rng, Parameters&amp; parameters, bool gradient) const</div>
+</div><!-- fragment --><p>There are two variants that write into a reference to a trace object instead of returning a new trace object:</p>
+<div class="fragment"><div class="line">template &lt;typename RNG, typename Parameters&gt;</div>
+<div class="line">void simulate(Trace&amp; trace, RNG&amp; rng, Parameters&amp;, bool gradient) const</div>
+</div><!-- fragment --><div class="fragment"><div class="line">template &lt;typename RNG, typename Parameters&gt;</div>
+<div class="line">double generate(Trace&amp; trace, RNG&amp; rng, Parameters&amp; parameters, bool gradient) const</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md3"></a>
 Trace</h2>
 <p>A possible sample from the probability distribution of a BoundGenerativeFunction.</p>
 <p>Traces typically do not have public constructors, and are instead obtained from the <code>simulate</code> and <code>generate</code> functions of a BoundGenerativeFunction.</p>
 <p>Member functions:</p>
-<ul>
-<li><code>update</code></li>
-<li><code>revert</code></li>
-<li><code>fork</code></li>
-<li><code>choices</code></li>
-<li><code>score</code></li>
-<li><code>parameter_gradient</code></li>
-<li><code>choice_gradient</code></li>
-</ul>
-<h2><a class="anchor" id="autotoc_md4"></a>
+<div class="fragment"><div class="line">template &lt;typename RNG&gt;</div>
+<div class="line">std::tuple&lt;double, const BackwardChoiceBuffer&amp;, const ValueChange&amp;&gt; update(RNG&amp;, const InputChange&amp;, const ForwardChoiceBuffer&amp;, bool save, bool gradient)</div>
+</div><!-- fragment --><p>Note that the <code>BackwardChoiceBuffer</code> and <code>ValueChange</code> references will become undefined after the next call to <code>update</code> or <code>revert</code> or <code>fork</code>.</p>
+<div class="fragment"><div class="line">void revert()</div>
+</div><!-- fragment --><div class="fragment"><div class="line">void fork()</div>
+</div><!-- fragment --><div class="fragment"><div class="line">const ChoiceBuffer&amp; choices(const Selection&amp;) const</div>
+</div><!-- fragment --><div class="fragment"><div class="line">double score() const</div>
+</div><!-- fragment --><div class="fragment"><div class="line">Output get_return_value() const</div>
+</div><!-- fragment --><div class="fragment"><div class="line">InputGradient parameter_gradient(const OutputGradient&amp;, double scaler, GradientAccumulator&amp;)</div>
+</div><!-- fragment --><div class="fragment"><div class="line">std::pair&lt;InputGradient choice_gradient(const Selection&amp;, const OutputGradient&amp;)</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md4"></a>
 ChoiceBuffer</h2>
-<p>Storage for the values of random choices.</p>
+<p>Stores the values of random choices.</p>
+<p>To support MALA and HMC, it must support the following elementwise arithmetic operators: <code>+</code>, <code>-</code>, <code>*</code> with an element of the same type as well as with <code>double</code>, <code>+=</code>, unary <code>-</code>.</p>
 <h2><a class="anchor" id="autotoc_md5"></a>
 ChoiceSelection</h2>
 <p>A set of random choices.</p>
@@ -105,14 +113,12 @@ Change</h2>
 <p>A change to the input or output of a generative function.</p>
 <h2><a class="anchor" id="autotoc_md7"></a>
 ParameterStore</h2>
-<p>Storage for parameters that support gradient-based learning.</p>
+<p>Storage for parameters that support gradient-based learning. They maintain a current value for the parameters and a value for the gradient with respect to the parameters that is used by gradient-based learning algorithms including stochastic gradient descent.</p>
 <h2><a class="anchor" id="autotoc_md8"></a>
 ParameterGradientAccumulator</h2>
-<p>Member functions:</p>
-<ul>
-<li><code>update_gradient</code></li>
-</ul>
-<h1><a class="anchor" id="autotoc_md9"></a>
+<p>ParameterGradientAccumulators are constructed from a ParameterStore object. Separate ParameterGradientAccumulator objects can be used to accumulate gradients with respect to parameters in parallel.</p>
+<p>The following function accumulates the gradients of the source ParameterStore object (and resets the ParameterGradientAccumulator): </p><div class="fragment"><div class="line">void update_gradient()</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md9"></a>
 Functionality</h1>
 <h2><a class="anchor" id="autotoc_md10"></a>
 Modeling</h2>
