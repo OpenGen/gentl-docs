@@ -69,31 +69,32 @@ $(function() {
 <div class="textblock"><p>This documentation is a work-in-progress.</p>
 <h1><a class="anchor" id="autotoc_md0"></a>
 Concepts</h1>
-<p>Using GenTL typically involves defining your own types that adhere to a set of concepts. GenTL does not provide any abstract classes that define these concepts.</p>
+<p>Using GenTL typically involves defining your own types that adhere to a set of concepts. Note that there is no abstract class for each of these concepts in GenTL (i.e. there is no general abstract <code>Trace</code> class).</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 GenerativeFunction</h2>
 <p>An object whose call operator <code>()</code> returns a BoundGenerativeFunction.</p>
-<p>The input to the call is called the Input and related to the InputGradient and InputChange types.</p>
+<p>The type of the argument to this operator is related to the InputGradient and InputChange types.</p>
 <h2><a class="anchor" id="autotoc_md2"></a>
 BoundGenerativeFunction</h2>
-<p>An object that is capable of generating a Trace, given a random number generator, a parameter object, and optionally a ChoiceBuffer that describes constraints that the resulting Trace should satisfy.</p>
+<p>An object that is capable of generating a Trace, given a random number generator (RNG), a ParameterStore object, and optionally a ChoiceBuffer that describes constraints that the resulting Trace should satisfy.</p>
 <p>There are two template member functions that are used to obtain Traces:</p>
-<div class="fragment"><div class="line">template &lt;typename RNG, typename Parameters&gt;</div>
-<div class="line">std::unique_ptr&lt;Trace&gt; simulate(RNG&amp; rng, Parameters&amp;, bool gradient) const</div>
-</div><!-- fragment --><div class="fragment"><div class="line">template &lt;typename RNG, typename Parameters&gt;</div>
-<div class="line">std::pair&lt;std::unique_ptr&lt;Trace&gt;, double&gt; generate(RNG&amp; rng, Parameters&amp; parameters, bool gradient) const</div>
+<div class="fragment"><div class="line">template &lt;typename RNG, typename ParameterStore&gt;</div>
+<div class="line">std::unique_ptr&lt;Trace&gt; simulate(RNG&amp;, ParameterStore&amp;, bool gradient) const</div>
+</div><!-- fragment --><div class="fragment"><div class="line">template &lt;typename RNG, typename ParameterStore&gt;</div>
+<div class="line">std::pair&lt;std::unique_ptr&lt;Trace&gt;, double&gt; generate(RNG&amp;, ParameterStore&amp;, const ChoiceBuffer&amp;, bool gradient) const</div>
 </div><!-- fragment --><p>There are two variants that write into a reference to a trace object instead of returning a new trace object:</p>
-<div class="fragment"><div class="line">template &lt;typename RNG, typename Parameters&gt;</div>
-<div class="line">void simulate(Trace&amp; trace, RNG&amp; rng, Parameters&amp;, bool gradient) const</div>
-</div><!-- fragment --><div class="fragment"><div class="line">template &lt;typename RNG, typename Parameters&gt;</div>
-<div class="line">double generate(Trace&amp; trace, RNG&amp; rng, Parameters&amp; parameters, bool gradient) const</div>
+<div class="fragment"><div class="line">template &lt;typename RNG, typename ParameterStore&gt;</div>
+<div class="line">void simulate(Trace&amp;, RNG&amp;, ParameterStore&amp;, bool gradient) const</div>
+</div><!-- fragment --><div class="fragment"><div class="line">template &lt;typename RNG, typename ParameterStore&gt;</div>
+<div class="line">double generate(Trace&amp;, RNG&amp;, ParameterStore&amp;, const ChoiceBuffer&amp;, bool gradient) const</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md3"></a>
 Trace</h2>
 <p>A possible sample from the probability distribution of a BoundGenerativeFunction.</p>
 <p>Traces typically do not have public constructors, and are instead obtained from the <code>simulate</code> and <code>generate</code> functions of a BoundGenerativeFunction.</p>
 <p>Member functions:</p>
 <div class="fragment"><div class="line">template &lt;typename RNG&gt;</div>
-<div class="line">std::tuple&lt;double, const BackwardChoiceBuffer&amp;, const ValueChange&amp;&gt; update(RNG&amp;, const InputChange&amp;, const ForwardChoiceBuffer&amp;, bool save, bool gradient)</div>
+<div class="line">std::tuple&lt;double, const BackwardChoiceBuffer&amp;, const ValueChange&amp;&gt; update(</div>
+<div class="line">        RNG&amp;, const InputChange&amp;, const ForwardChoiceBuffer&amp;, bool save, bool gradient)</div>
 </div><!-- fragment --><p>Note that the <code>BackwardChoiceBuffer</code> and <code>ValueChange</code> references will become undefined after the next call to <code>update</code> or <code>revert</code> or <code>fork</code>.</p>
 <div class="fragment"><div class="line">void revert()</div>
 </div><!-- fragment --><div class="fragment"><div class="line">void fork()</div>
