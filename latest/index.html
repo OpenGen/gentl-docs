@@ -68,12 +68,14 @@ $(function() {
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="autotoc_md0"></a>
 Concepts</h1>
+<p>Using GenTL typically involves defining your own types that adhere to a set of concepts. GenTL does not provide any abstract classes that define these concepts.</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 GenerativeFunction</h2>
 <p>An object whose call operator <code>()</code> returns a BoundGenerativeFunction.</p>
 <h2><a class="anchor" id="autotoc_md2"></a>
 BoundGenerativeFunction</h2>
-<p>Member functions:</p>
+<p>An object that is capable of generating a Trace, given a random number generator, a parameter object, and optionally a ChoiceBuffer that describes constraints that the resulting Trace should satisfy.</p>
+<p>There are two member functions that are used to generate Traces:</p>
 <ul>
 <li><code>simulate</code> (two variants)</li>
 <li><code>generate</code> (two variants)</li>
@@ -81,6 +83,7 @@ BoundGenerativeFunction</h2>
 <h2><a class="anchor" id="autotoc_md3"></a>
 Trace</h2>
 <p>A possible sample from the probability distribution of a BoundGenerativeFunction.</p>
+<p>Traces typically do not have public constructors, and are instead obtained from the <code>simulate</code> and <code>generate</code> functions of a BoundGenerativeFunction.</p>
 <p>Member functions:</p>
 <ul>
 <li><code>update</code></li>
