@@ -78,9 +78,9 @@ GenerativeFunction</h2>
 BoundGenerativeFunction</h2>
 <p>An object that is capable of generating a Trace, given a random number generator (RNG), a ParameterStore object, and optionally a ChoiceBuffer that describes constraints that the resulting Trace should satisfy.</p>
 <p>There are two template member functions that are used to obtain Traces:</p>
-<div class="fragment"><div class="line">template &lt;typename RNG, typename ParameterStore&gt;</div>
+<p>Sample from the joint distribution, and optionally compute and cache gradients with respect to trainable parameters. </p><div class="fragment"><div class="line">template &lt;typename RNG, typename ParameterStore&gt;</div>
 <div class="line">std::unique_ptr&lt;Trace&gt; simulate(RNG&amp;, ParameterStore&amp;, bool gradient) const</div>
-</div><!-- fragment --><div class="fragment"><div class="line">template &lt;typename RNG, typename ParameterStore&gt;</div>
+</div><!-- fragment --><p>Sample from an alternate distribution, and return an importance weight accounting for the difference, and optionally compute and cache gradients with respect to trainable parameters. </p><div class="fragment"><div class="line">template &lt;typename RNG, typename ParameterStore&gt;</div>
 <div class="line">std::pair&lt;std::unique_ptr&lt;Trace&gt;, double&gt; generate(RNG&amp;, ParameterStore&amp;, const ChoiceBuffer&amp;, bool gradient) const</div>
 </div><!-- fragment --><p>There are two variants that write into a reference to a trace object instead of returning a new trace object:</p>
 <div class="fragment"><div class="line">template &lt;typename RNG, typename ParameterStore&gt;</div>
@@ -92,17 +92,17 @@ Trace</h2>
 <p>A possible sample from the probability distribution of a BoundGenerativeFunction.</p>
 <p>Traces typically do not have public constructors, and are instead obtained from the <code>simulate</code> and <code>generate</code> functions of a BoundGenerativeFunction.</p>
 <p>Member functions:</p>
-<div class="fragment"><div class="line">template &lt;typename RNG&gt;</div>
+<p>Modify the state of a trace: </p><div class="fragment"><div class="line">template &lt;typename RNG&gt;</div>
 <div class="line">std::tuple&lt;double, const BackwardChoiceBuffer&amp;, const ValueChange&amp;&gt; update(</div>
 <div class="line">        RNG&amp;, const InputChange&amp;, const ForwardChoiceBuffer&amp;, bool save, bool gradient)</div>
-</div><!-- fragment --><p>Note that the <code>BackwardChoiceBuffer</code> and <code>ValueChange</code> references will become undefined after the next call to <code>update</code> or <code>revert</code> or <code>fork</code>.</p>
-<div class="fragment"><div class="line">void revert()</div>
-</div><!-- fragment --><div class="fragment"><div class="line">void fork()</div>
-</div><!-- fragment --><div class="fragment"><div class="line">const ChoiceBuffer&amp; choices(const Selection&amp;) const</div>
-</div><!-- fragment --><div class="fragment"><div class="line">double score() const</div>
+</div><!-- fragment --><p>Revert to the state before the most recent <code>update</code> call for which the <code>save</code> flag is set. </p><div class="fragment"><div class="line">void revert()</div>
+</div><!-- fragment --><p>Return a new trace that is observationally independent from <code>this</code>: </p><div class="fragment"><div class="line">std::unique_ptr&lt;Trace&gt; fork()</div>
+</div><!-- fragment --><p>The <code>BackwardChoiceBuffer</code> and <code>ValueChange</code> references returned by <code>update</code> will become undefined after the next call to <code>update</code> or <code>revert</code> or <code>fork</code>.</p>
+<div class="fragment"><div class="line">const ChoiceBuffer&amp; choices(const Selection&amp;) const</div>
+</div><!-- fragment --><p>Return the log joint probability density: </p><div class="fragment"><div class="line">double score() const</div>
 </div><!-- fragment --><div class="fragment"><div class="line">Output get_return_value() const</div>
-</div><!-- fragment --><div class="fragment"><div class="line">InputGradient parameter_gradient(const OutputGradient&amp;, double scaler, GradientAccumulator&amp;)</div>
-</div><!-- fragment --><div class="fragment"><div class="line">std::pair&lt;InputGradient choice_gradient(const Selection&amp;, const OutputGradient&amp;)</div>
+</div><!-- fragment --><p>Compute the gradient of the log joint density with respect to the parameters, and accumulate this gradient into the given GradientAccumulator object. </p><div class="fragment"><div class="line">InputGradient parameter_gradient(const OutputGradient&amp;, double scaler, GradientAccumulator&amp;)</div>
+</div><!-- fragment --><p>Compute the gradient of the log joint density with respect to the choices, and return it&gt; </p><div class="fragment"><div class="line">std::pair&lt;InputGradient, const ChoiceBuffer&amp;&gt; choice_gradient(const Selection&amp;, const OutputGradient&amp;)</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md4"></a>
 ChoiceBuffer</h2>
 <p>Stores the values of random choices.</p>
