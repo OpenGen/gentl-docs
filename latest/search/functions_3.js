@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['generate_78',['generate',['../structgentl_1_1randutils_1_1seed__seq__fe.html#aafb5c5000e65014629e4a9fba54d5b5a',1,'gentl::randutils::seed_seq_fe']]],
-  ['generate_5fminibatch_79',['generate_minibatch',['../namespacegentl_1_1sgd.html#a604b8b9483d4169bc0077feb50120c69',1,'gentl::sgd']]]
+  ['effective_5fsample_5fsize_119',['effective_sample_size',['../classgentl_1_1smc_1_1ParticleSystem.html#afd5c1fda58d93c59e991b45a6a4a0394',1,'gentl::smc::ParticleSystem']]],
+  ['estimate_5fobjective_120',['estimate_objective',['../namespacegentl_1_1sgd.html#a67d2990942498a32a7be90cf0ae1f78f',1,'gentl::sgd']]]
 ];

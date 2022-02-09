@@ -1,9 +1,4 @@
 var searchData=
 [
-  ['mala_84',['mala',['../namespacegentl_1_1mcmc.html#a5411d92e7d3ef8a1fba2f45e104863c4',1,'gentl::mcmc']]],
-  ['mala_5fassess_85',['mala_assess',['../namespacegentl_1_1mcmc.html#ae55004175c3686b20e54fd1fd03e16e9',1,'gentl::mcmc']]],
-  ['mala_5fpropose_5fvalues_86',['mala_propose_values',['../namespacegentl_1_1mcmc.html#aa635f3682d33a554901a5cc7c9236860',1,'gentl::mcmc']]],
-  ['mh_87',['mh',['../namespacegentl_1_1mcmc.html#a50fe1000f2f38061b100d715ca21acee',1,'gentl::mcmc']]],
-  ['mh_5faccept_5fprob_88',['mh_accept_prob',['../namespacegentl_1_1mcmc.html#a71d9e4a384b8e8b8be193a4e69e7ab30',1,'gentl::mcmc']]],
-  ['mh_5fchain_89',['mh_chain',['../namespacegentl_1_1mcmc.html#a44b9ec2e4c1a8ecd29da4af3c846344f',1,'gentl::mcmc']]]
+  ['init_5fstep_127',['init_step',['../classgentl_1_1smc_1_1ParticleSystem.html#ae74d8496b81b3fdd00b716a0e28cd29f',1,'gentl::smc::ParticleSystem']]]
 ];
