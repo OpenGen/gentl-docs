@@ -83,9 +83,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae74d8496b81b3fdd00b716a0e28cd29f"><td class="memTemplParams" colspan="2">template&lt;typename Model , typename Parameters , typename Constraints &gt; </td></tr>
 <tr class="memitem:ae74d8496b81b3fdd00b716a0e28cd29f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classgentl_1_1smc_1_1ParticleSystem.html#ae74d8496b81b3fdd00b716a0e28cd29f">init_step</a> (const Model &amp;model, Parameters &amp;parameters, const Constraints &amp;constraints)</td></tr>
 <tr class="separator:ae74d8496b81b3fdd00b716a0e28cd29f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafe5a3427c82c0250ba74a26903b8b36"><td class="memTemplParams" colspan="2">template&lt;typename ModelChange , typename Constraints &gt; </td></tr>
-<tr class="memitem:aafe5a3427c82c0250ba74a26903b8b36"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classgentl_1_1smc_1_1ParticleSystem.html#aafe5a3427c82c0250ba74a26903b8b36">step</a> (const ModelChange &amp;model_change, const Constraints &amp;constraints)</td></tr>
-<tr class="separator:aafe5a3427c82c0250ba74a26903b8b36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae89d100a60b588101bef9029d392133f"><td class="memTemplParams" colspan="2">template&lt;typename InputChange , typename Constraints &gt; </td></tr>
+<tr class="memitem:ae89d100a60b588101bef9029d392133f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classgentl_1_1smc_1_1ParticleSystem.html#ae89d100a60b588101bef9029d392133f">step</a> (const InputChange &amp;input_change, const Constraints &amp;constraints)</td></tr>
+<tr class="separator:ae89d100a60b588101bef9029d392133f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd5c1fda58d93c59e991b45a6a4a0394"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgentl_1_1smc_1_1ParticleSystem.html#afd5c1fda58d93c59e991b45a6a4a0394">effective_sample_size</a> () const</td></tr>
 <tr class="separator:afd5c1fda58d93c59e991b45a6a4a0394"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbbcee57b4788125875de1f47ee2b686"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgentl_1_1smc_1_1ParticleSystem.html#afbbcee57b4788125875de1f47ee2b686">resample</a> ()</td></tr>
@@ -262,15 +262,15 @@ template&lt;typename Trace , typename RNGType &gt; </div>
 
 </div>
 </div>
-<a id="aafe5a3427c82c0250ba74a26903b8b36"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aafe5a3427c82c0250ba74a26903b8b36">&#9670;&nbsp;</a></span>step()</h2>
+<a id="ae89d100a60b588101bef9029d392133f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae89d100a60b588101bef9029d392133f">&#9670;&nbsp;</a></span>step()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Trace , typename RNGType &gt; </div>
 <div class="memtemplate">
-template&lt;typename ModelChange , typename Constraints &gt; </div>
+template&lt;typename InputChange , typename Constraints &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -278,8 +278,8 @@ template&lt;typename ModelChange , typename Constraints &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classgentl_1_1smc_1_1ParticleSystem.html">gentl::smc::ParticleSystem</a>&lt; Trace, RNGType &gt;::step </td>
           <td>(</td>
-          <td class="paramtype">const ModelChange &amp;&#160;</td>
-          <td class="paramname"><em>model_change</em>, </td>
+          <td class="paramtype">const InputChange &amp;&#160;</td>
+          <td class="paramname"><em>input_change</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

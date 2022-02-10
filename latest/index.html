@@ -69,6 +69,7 @@ $(function() {
 <div class="textblock"><p>This documentation is a work-in-progress.</p>
 <h1><a class="anchor" id="autotoc_md0"></a>
 Concepts</h1>
+<p>See include/gentl/concepts.h for a formal definition of these concepts.</p>
 <p>Using GenTL typically involves defining your own types that adhere to a set of concepts. Note that there is no abstract class for each of these concepts in GenTL (i.e. there is no general abstract <code>Trace</code> class).</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 GenerativeFunction</h2>
@@ -102,7 +103,7 @@ Trace</h2>
 </div><!-- fragment --><p>Revert to the state before the most recent <code>update</code> call for which the <code>save</code> flag is set. </p><div class="fragment"><div class="line">void revert()</div>
 </div><!-- fragment --><p>Return a new trace that is observationally independent from <code>this</code>: </p><div class="fragment"><div class="line">std::unique_ptr&lt;Trace&gt; fork()</div>
 </div><!-- fragment --><p>Return a view into the value of some subset of the random choices in the trace: </p><div class="fragment"><div class="line">const ChoiceBuffer&amp; choices(const Selection&amp;) const</div>
-</div><!-- fragment --><p>NOTE: <a class="el" href="namespacegentl_1_1mcmc.html#ab296b1fc356e318433d3b2dccf657338">gentl::mcmc::mh</a> requires that the proposal implement <code>choices(const gentl::selections:all)</code>.</p>
+</div><!-- fragment --><p>NOTE: <a class="el" href="namespacegentl_1_1mcmc.html#acccc21e70c82487dcbfadda1de4dfaf9">gentl::mcmc::mh</a> requires that the proposal implement <code>choices(const gentl::selections:all)</code>.</p>
 <p>Return the log joint probability density: </p><div class="fragment"><div class="line">double score() const</div>
 </div><!-- fragment --><p>Return the return value of the trace, which is in general different from the choices. </p><div class="fragment"><div class="line">Output return_value() const</div>
 </div><!-- fragment --><p>Compute the gradient of the log joint density with respect to the parameters, and accumulate this gradient into the given GradientAccumulator object. </p><div class="fragment"><div class="line">void parameter_gradient(GradientAccumulator&amp;, double scaler=1.0)</div>
@@ -141,9 +142,9 @@ Inference and Learning</h2>
 <h3><a class="anchor" id="autotoc_md13"></a>
 Markov chain Monte Carlo (MCMC)</h3>
 <ul>
-<li><a class="el" href="namespacegentl_1_1mcmc.html#ab296b1fc356e318433d3b2dccf657338">gentl::mcmc::mh</a></li>
-<li><a class="el" href="namespacegentl_1_1mcmc.html#addfb4013c964b4b717deaf1c13163e7a">gentl::mcmc::hmc</a></li>
-<li><a class="el" href="namespacegentl_1_1mcmc.html#a5411d92e7d3ef8a1fba2f45e104863c4">gentl::mcmc::mala</a></li>
+<li><a class="el" href="namespacegentl_1_1mcmc.html#acccc21e70c82487dcbfadda1de4dfaf9">gentl::mcmc::mh</a></li>
+<li><a class="el" href="namespacegentl_1_1mcmc.html#ab0fdc5761b6a8d61e00f98a7b4a68ace">gentl::mcmc::hmc</a></li>
+<li><a class="el" href="namespacegentl_1_1mcmc.html#ab984939fedfa2d2060ec60d05b7df42d">gentl::mcmc::mala</a></li>
 </ul>
 <h3><a class="anchor" id="autotoc_md14"></a>
 Sequential Monte Carlo (SMC)</h3>
@@ -153,7 +154,7 @@ Sequential Monte Carlo (SMC)</h3>
 <h3><a class="anchor" id="autotoc_md15"></a>
 Sampling importance resampling (SIR)</h3>
 <ul>
-<li><a class="el" href="namespacegentl_1_1sir.html#a222b5d078c57018ed0a6074f9b827c9c">gentl::sir::rolling_importance_resampling</a></li>
+<li><a class="el" href="namespacegentl_1_1sir.html#a8e7d92fc489e7e73b61cf17bd1f36066">gentl::sir::rolling_importance_resampling</a></li>
 </ul>
 <h3><a class="anchor" id="autotoc_md16"></a>
 Maximum likelihood</h3>

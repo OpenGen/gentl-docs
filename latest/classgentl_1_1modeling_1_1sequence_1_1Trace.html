@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>GenTL: gentl::modeling::sequence::Trace&lt; SubmodelType, SubtraceType, ValueType, ParametersType &gt; Class Template Reference</title>
+<title>GenTL: gentl::modeling::sequence::Trace&lt; Submodel, Subtrace, Value, Parameters &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -70,7 +70,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classgentl_1_1modeling_1_1sequence_1_1Trace-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">gentl::modeling::sequence::Trace&lt; SubmodelType, SubtraceType, ValueType, ParametersType &gt; Class Template Reference</div>  </div>
+<div class="title">gentl::modeling::sequence::Trace&lt; Submodel, Subtrace, Value, Parameters &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -78,45 +78,45 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a231eb5f48320bac34fe016d896fd6652"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html#a231eb5f48320bac34fe016d896fd6652">Trace</a> (const SubmodelType &amp;submodel, ValueType init_value, ParametersType &amp;parameters)</td></tr>
-<tr class="separator:a231eb5f48320bac34fe016d896fd6652"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac27b0cd6dc5bfe2db492f7406171bce5"><td class="memTemplParams" colspan="2">template&lt;typename RNGType , typename ConstraintsType &gt; </td></tr>
-<tr class="memitem:ac27b0cd6dc5bfe2db492f7406171bce5"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html#ac27b0cd6dc5bfe2db492f7406171bce5">update</a> (RNGType &amp;rng, const <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1modelchange_1_1Extend.html">modelchange::Extend</a> &amp;, const <a class="el" href="structgentl_1_1modeling_1_1sequence_1_1constraints_1_1NewStepOnly.html">constraints::NewStepOnly</a>&lt; ConstraintsType &gt; &amp;constraints, const UpdateOptions &amp;options)</td></tr>
-<tr class="separator:ac27b0cd6dc5bfe2db492f7406171bce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34603e8e6604f9aa82d4fc99813ecc23"><td class="memTemplParams" colspan="2">template&lt;typename RNGType , typename ConstraintsType &gt; </td></tr>
-<tr class="memitem:a34603e8e6604f9aa82d4fc99813ecc23"><td class="memTemplItemLeft" align="right" valign="top">std::tuple&lt; double, const <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1constraints_1_1General.html">constraints::General</a>&lt; ConstraintsType &gt; &amp;, const <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1valuechange_1_1Unknown.html">valuechange::Unknown</a> &amp; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html#a34603e8e6604f9aa82d4fc99813ecc23">update</a> (RNGType &amp;rng, const <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1modelchange_1_1None.html">modelchange::None</a> &amp;, const <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1constraints_1_1General.html">constraints::General</a>&lt; ConstraintsType &gt; &amp;constraints, const UpdateOptions &amp;options)</td></tr>
-<tr class="separator:a34603e8e6604f9aa82d4fc99813ecc23"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67408d9cf7f84faf5f176fb1dc327241"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html">Trace</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html#a67408d9cf7f84faf5f176fb1dc327241">fork</a> ()</td></tr>
-<tr class="separator:a67408d9cf7f84faf5f176fb1dc327241"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca067b236eaa2bddbb4aed3d1b40e6e7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html#aca067b236eaa2bddbb4aed3d1b40e6e7">Trace</a> (const Submodel &amp;submodel, Value init_value, Parameters &amp;parameters)</td></tr>
+<tr class="separator:aca067b236eaa2bddbb4aed3d1b40e6e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3396c302687028f8c09d057ad552433a"><td class="memTemplParams" colspan="2">template&lt;typename RNGType , typename Constraint &gt; </td></tr>
+<tr class="memitem:a3396c302687028f8c09d057ad552433a"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html#a3396c302687028f8c09d057ad552433a">update</a> (RNGType &amp;rng, const <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1modelchange_1_1Extend.html">modelchange::Extend</a> &amp;, const <a class="el" href="structgentl_1_1modeling_1_1sequence_1_1constraints_1_1NewStepOnly.html">constraints::NewStepOnly</a>&lt; Constraint &gt; &amp;constraints, const UpdateOptions &amp;options)</td></tr>
+<tr class="separator:a3396c302687028f8c09d057ad552433a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91c21a7d37a5cd0d3d149a862229b17d"><td class="memTemplParams" colspan="2">template&lt;typename RNGType , typename Constraint &gt; </td></tr>
+<tr class="memitem:a91c21a7d37a5cd0d3d149a862229b17d"><td class="memTemplItemLeft" align="right" valign="top">std::tuple&lt; double, const <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1constraints_1_1General.html">constraints::General</a>&lt; Constraint &gt; &amp;, const <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1valuechange_1_1Unknown.html">valuechange::Unknown</a> &amp; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html#a91c21a7d37a5cd0d3d149a862229b17d">update</a> (RNGType &amp;rng, const <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1modelchange_1_1None.html">modelchange::None</a> &amp;, const <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1constraints_1_1General.html">constraints::General</a>&lt; Constraint &gt; &amp;constraints, const UpdateOptions &amp;options)</td></tr>
+<tr class="separator:a91c21a7d37a5cd0d3d149a862229b17d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4092bfba0309984997f53ff00e962b3d"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html">Trace</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html#a4092bfba0309984997f53ff00e962b3d">fork</a> ()</td></tr>
+<tr class="separator:a4092bfba0309984997f53ff00e962b3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a231eb5f48320bac34fe016d896fd6652"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a231eb5f48320bac34fe016d896fd6652">&#9670;&nbsp;</a></span>Trace()</h2>
+<a id="aca067b236eaa2bddbb4aed3d1b40e6e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca067b236eaa2bddbb4aed3d1b40e6e7">&#9670;&nbsp;</a></span>Trace()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SubmodelType , typename SubtraceType , typename ValueType , typename ParametersType &gt; </div>
+template&lt;typename Submodel , typename Subtrace , typename Value , typename Parameters &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html">gentl::modeling::sequence::Trace</a>&lt; SubmodelType, SubtraceType, ValueType, ParametersType &gt;::<a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html">Trace</a> </td>
+          <td class="memname"><a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html">gentl::modeling::sequence::Trace</a>&lt; Submodel, Subtrace, Value, Parameters &gt;::<a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html">Trace</a> </td>
           <td>(</td>
-          <td class="paramtype">const SubmodelType &amp;&#160;</td>
+          <td class="paramtype">const Submodel &amp;&#160;</td>
           <td class="paramname"><em>submodel</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ValueType&#160;</td>
+          <td class="paramtype">Value&#160;</td>
           <td class="paramname"><em>init_value</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ParametersType &amp;&#160;</td>
+          <td class="paramtype">Parameters &amp;&#160;</td>
           <td class="paramname"><em>parameters</em>&#160;</td>
         </tr>
         <tr>
@@ -135,19 +135,19 @@ template&lt;typename SubmodelType , typename SubtraceType , typename ValueType ,
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a67408d9cf7f84faf5f176fb1dc327241"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67408d9cf7f84faf5f176fb1dc327241">&#9670;&nbsp;</a></span>fork()</h2>
+<a id="a4092bfba0309984997f53ff00e962b3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4092bfba0309984997f53ff00e962b3d">&#9670;&nbsp;</a></span>fork()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SubmodelType , typename SubtraceType , typename ValueType , typename ParametersType &gt; </div>
+template&lt;typename Submodel , typename Subtrace , typename Value , typename Parameters &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unique_ptr&lt;<a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html">Trace</a>&gt; <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html">gentl::modeling::sequence::Trace</a>&lt; SubmodelType, SubtraceType, ValueType, ParametersType &gt;::fork </td>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html">Trace</a>&gt; <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html">gentl::modeling::sequence::Trace</a>&lt; Submodel, Subtrace, Value, Parameters &gt;::fork </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -162,21 +162,21 @@ template&lt;typename SubmodelType , typename SubtraceType , typename ValueType ,
 
 </div>
 </div>
-<a id="ac27b0cd6dc5bfe2db492f7406171bce5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac27b0cd6dc5bfe2db492f7406171bce5">&#9670;&nbsp;</a></span>update() <span class="overload">[1/2]</span></h2>
+<a id="a3396c302687028f8c09d057ad552433a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3396c302687028f8c09d057ad552433a">&#9670;&nbsp;</a></span>update() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SubmodelType , typename SubtraceType , typename ValueType , typename ParametersType &gt; </div>
+template&lt;typename Submodel , typename Subtrace , typename Value , typename Parameters &gt; </div>
 <div class="memtemplate">
-template&lt;typename RNGType , typename ConstraintsType &gt; </div>
+template&lt;typename RNGType , typename Constraint &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html">gentl::modeling::sequence::Trace</a>&lt; SubmodelType, SubtraceType, ValueType, ParametersType &gt;::update </td>
+          <td class="memname">double <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html">gentl::modeling::sequence::Trace</a>&lt; Submodel, Subtrace, Value, Parameters &gt;::update </td>
           <td>(</td>
           <td class="paramtype">RNGType &amp;&#160;</td>
           <td class="paramname"><em>rng</em>, </td>
@@ -190,7 +190,7 @@ template&lt;typename RNGType , typename ConstraintsType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structgentl_1_1modeling_1_1sequence_1_1constraints_1_1NewStepOnly.html">constraints::NewStepOnly</a>&lt; ConstraintsType &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="structgentl_1_1modeling_1_1sequence_1_1constraints_1_1NewStepOnly.html">constraints::NewStepOnly</a>&lt; Constraint &gt; &amp;&#160;</td>
           <td class="paramname"><em>constraints</em>, </td>
         </tr>
         <tr>
@@ -214,21 +214,21 @@ template&lt;typename RNGType , typename ConstraintsType &gt; </div>
 
 </div>
 </div>
-<a id="a34603e8e6604f9aa82d4fc99813ecc23"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34603e8e6604f9aa82d4fc99813ecc23">&#9670;&nbsp;</a></span>update() <span class="overload">[2/2]</span></h2>
+<a id="a91c21a7d37a5cd0d3d149a862229b17d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91c21a7d37a5cd0d3d149a862229b17d">&#9670;&nbsp;</a></span>update() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SubmodelType , typename SubtraceType , typename ValueType , typename ParametersType &gt; </div>
+template&lt;typename Submodel , typename Subtrace , typename Value , typename Parameters &gt; </div>
 <div class="memtemplate">
-template&lt;typename RNGType , typename ConstraintsType &gt; </div>
+template&lt;typename RNGType , typename Constraint &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::tuple&lt;double, const <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1constraints_1_1General.html">constraints::General</a>&lt;ConstraintsType&gt;&amp;, const <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1valuechange_1_1Unknown.html">valuechange::Unknown</a>&amp;&gt; <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html">gentl::modeling::sequence::Trace</a>&lt; SubmodelType, SubtraceType, ValueType, ParametersType &gt;::update </td>
+          <td class="memname">std::tuple&lt;double, const <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1constraints_1_1General.html">constraints::General</a>&lt;Constraint&gt;&amp;, const <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1valuechange_1_1Unknown.html">valuechange::Unknown</a>&amp;&gt; <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html">gentl::modeling::sequence::Trace</a>&lt; Submodel, Subtrace, Value, Parameters &gt;::update </td>
           <td>(</td>
           <td class="paramtype">RNGType &amp;&#160;</td>
           <td class="paramname"><em>rng</em>, </td>
@@ -242,7 +242,7 @@ template&lt;typename RNGType , typename ConstraintsType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1constraints_1_1General.html">constraints::General</a>&lt; ConstraintsType &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1constraints_1_1General.html">constraints::General</a>&lt; Constraint &gt; &amp;&#160;</td>
           <td class="paramname"><em>constraints</em>, </td>
         </tr>
         <tr>

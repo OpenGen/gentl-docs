@@ -68,7 +68,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">mcmc.h File Reference</div>  </div>
 </div><!--header-->
@@ -76,15 +77,17 @@ $(function() {
 <div class="textblock"><code>#include &lt;cmath&gt;</code><br />
 <code>#include &lt;random&gt;</code><br />
 <code>#include &lt;gentl/types.h&gt;</code><br />
+<code>#include &lt;gentl/concepts.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for mcmc.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="mcmc_8h__incl.png" border="0" usemap="#gentl_2inference_2mcmc_8h" alt=""/></div>
 <map name="gentl_2inference_2mcmc_8h" id="gentl_2inference_2mcmc_8h">
-<area shape="rect" title=" " alt="" coords="41,5,217,32"/>
+<area shape="rect" title=" " alt="" coords="97,5,273,32"/>
 <area shape="rect" title=" " alt="" coords="5,80,68,107"/>
 <area shape="rect" title=" " alt="" coords="93,80,165,107"/>
 <area shape="rect" title=" " alt="" coords="189,80,295,107"/>
+<area shape="rect" title=" " alt="" coords="320,80,449,107"/>
 </map>
 </div>
 </div>
@@ -101,30 +104,33 @@ Namespaces</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a71d9e4a384b8e8b8be193a4e69e7ab30"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#a71d9e4a384b8e8b8be193a4e69e7ab30">gentl::mcmc::mh_accept_prob</a> (double model_log_weight, double proposal_forward_score, double proposal_backward_score)</td></tr>
 <tr class="separator:a71d9e4a384b8e8b8be193a4e69e7ab30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab296b1fc356e318433d3b2dccf657338"><td class="memTemplParams" colspan="2">template&lt;typename TraceType , typename ProposalTraceType , typename MakeProposalType , typename ProposalParametersType , typename RNGType &gt; </td></tr>
-<tr class="memitem:ab296b1fc356e318433d3b2dccf657338"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#ab296b1fc356e318433d3b2dccf657338">gentl::mcmc::mh</a> (TraceType &amp;model_trace, const MakeProposalType &amp;make_proposal, ProposalParametersType &amp;proposal_params, RNGType &amp;rng, ProposalTraceType &amp;proposal_trace, bool precompute_gradient=false)</td></tr>
-<tr class="separator:ab296b1fc356e318433d3b2dccf657338"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44b9ec2e4c1a8ecd29da4af3c846344f"><td class="memTemplParams" colspan="2">template&lt;typename TraceType , typename MakeProposalType , typename ProposalParametersType , typename RNGType &gt; </td></tr>
-<tr class="memitem:a44b9ec2e4c1a8ecd29da4af3c846344f"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#a44b9ec2e4c1a8ecd29da4af3c846344f">gentl::mcmc::mh_chain</a> (TraceType &amp;model_trace, const MakeProposalType &amp;make_proposal, ProposalParametersType &amp;proposal_params, size_t num_steps, RNGType &amp;rng)</td></tr>
-<tr class="separator:a44b9ec2e4c1a8ecd29da4af3c846344f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acccc21e70c82487dcbfadda1de4dfaf9"><td class="memTemplParams" colspan="2">template&lt;typename ModelTrace , typename ProposalTrace , typename Proposal , typename ProposalParams , typename RNGType &gt; </td></tr>
+<tr class="memitem:acccc21e70c82487dcbfadda1de4dfaf9"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#acccc21e70c82487dcbfadda1de4dfaf9">gentl::mcmc::mh</a> (RNGType &amp;rng, ModelTrace &amp;model_trace, const Proposal &amp;proposal, ProposalParams &amp;proposal_params, ProposalTrace &amp;proposal_trace, bool precompute_gradient=false)</td></tr>
+<tr class="separator:acccc21e70c82487dcbfadda1de4dfaf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa635f3682d33a554901a5cc7c9236860"><td class="memTemplParams" colspan="2">template&lt;typename ChoiceBuffer , typename RNGType &gt; </td></tr>
 <tr class="memitem:aa635f3682d33a554901a5cc7c9236860"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#aa635f3682d33a554901a5cc7c9236860">gentl::mcmc::mala_propose_values</a> (ChoiceBuffer &amp;proposal, const ChoiceBuffer &amp;current, const ChoiceBuffer &amp;gradient, double tau, RNGType &amp;rng)</td></tr>
 <tr class="separator:aa635f3682d33a554901a5cc7c9236860"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae55004175c3686b20e54fd1fd03e16e9"><td class="memTemplParams" colspan="2">template&lt;typename ChoiceBuffer &gt; </td></tr>
 <tr class="memitem:ae55004175c3686b20e54fd1fd03e16e9"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#ae55004175c3686b20e54fd1fd03e16e9">gentl::mcmc::mala_assess</a> (const ChoiceBuffer &amp;proposed, const ChoiceBuffer &amp;current, const ChoiceBuffer &amp;gradient, double tau, ChoiceBuffer &amp;storage)</td></tr>
 <tr class="separator:ae55004175c3686b20e54fd1fd03e16e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5411d92e7d3ef8a1fba2f45e104863c4"><td class="memTemplParams" colspan="2">template&lt;typename TraceType , typename SelectionType , typename RNGType , typename ChoiceBufferType &gt; </td></tr>
-<tr class="memitem:a5411d92e7d3ef8a1fba2f45e104863c4"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#a5411d92e7d3ef8a1fba2f45e104863c4">gentl::mcmc::mala</a> (TraceType &amp;trace, const SelectionType &amp;selection, double tau, ChoiceBufferType &amp;storage1, ChoiceBufferType &amp;storage2, RNGType &amp;rng)</td></tr>
-<tr class="separator:a5411d92e7d3ef8a1fba2f45e104863c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab984939fedfa2d2060ec60d05b7df42d"><td class="memTemplParams" colspan="2">template&lt;typename Trace , typename Selection , typename RNG , typename ChoiceBuffer &gt; </td></tr>
+<tr class="memitem:ab984939fedfa2d2060ec60d05b7df42d"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#ab984939fedfa2d2060ec60d05b7df42d">gentl::mcmc::mala</a> (Trace &amp;trace, const Selection &amp;selection, double tau, ChoiceBuffer &amp;storage1, ChoiceBuffer &amp;storage2, RNG &amp;rng)</td></tr>
+<tr class="separator:ab984939fedfa2d2060ec60d05b7df42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a072ac10253d220a4b50ec2b1827ed5e9"><td class="memTemplParams" colspan="2">template&lt;typename ChoiceBufferType , typename RNGType &gt; </td></tr>
 <tr class="memitem:a072ac10253d220a4b50ec2b1827ed5e9"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#a072ac10253d220a4b50ec2b1827ed5e9">gentl::mcmc::sample_momenta</a> (ChoiceBufferType &amp;momenta, RNGType &amp;rng)</td></tr>
 <tr class="separator:a072ac10253d220a4b50ec2b1827ed5e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75044f50e864ee9edfc3ac20619e3b44"><td class="memTemplParams" colspan="2">template&lt;typename ChoiceBufferType &gt; </td></tr>
 <tr class="memitem:a75044f50e864ee9edfc3ac20619e3b44"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#a75044f50e864ee9edfc3ac20619e3b44">gentl::mcmc::assess_momenta</a> (const ChoiceBufferType &amp;momenta)</td></tr>
 <tr class="separator:a75044f50e864ee9edfc3ac20619e3b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:addfb4013c964b4b717deaf1c13163e7a"><td class="memTemplParams" colspan="2">template&lt;typename TraceType , typename SelectionType , typename RNGType , typename ChoiceBufferType &gt; </td></tr>
-<tr class="memitem:addfb4013c964b4b717deaf1c13163e7a"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#addfb4013c964b4b717deaf1c13163e7a">gentl::mcmc::hmc</a> (TraceType &amp;trace, const SelectionType &amp;selection, size_t leapfrog_steps, double eps, ChoiceBufferType &amp;momenta_buffer, ChoiceBufferType &amp;values_buffer, RNGType &amp;rng)</td></tr>
-<tr class="separator:addfb4013c964b4b717deaf1c13163e7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0fdc5761b6a8d61e00f98a7b4a68ace"><td class="memTemplParams" colspan="2">template&lt;typename Trace , typename Selection , typename RNG , typename ChoiceBuffer &gt; </td></tr>
+<tr class="memitem:ab0fdc5761b6a8d61e00f98a7b4a68ace"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#ab0fdc5761b6a8d61e00f98a7b4a68ace">gentl::mcmc::hmc</a> (Trace &amp;trace, const Selection &amp;selection, size_t leapfrog_steps, double eps, ChoiceBuffer &amp;momenta_buffer, ChoiceBuffer &amp;values_buffer, RNG &amp;rng)</td></tr>
+<tr class="separator:ab0fdc5761b6a8d61e00f98a7b4a68ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:adb4c4792a89b284cc2c1ce7d417aeca8"><td class="memTemplParams" colspan="2">template&lt;typename ModelTrace , typename ProposalTrace &gt; </td></tr>
+<tr class="memitem:adb4c4792a89b284cc2c1ce7d417aeca8"><td class="memTemplItemLeft" align="right" valign="top">concept&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#adb4c4792a89b284cc2c1ce7d417aeca8">gentl::mcmc::MHProposalCompatible</a></td></tr>
+<tr class="separator:adb4c4792a89b284cc2c1ce7d417aeca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

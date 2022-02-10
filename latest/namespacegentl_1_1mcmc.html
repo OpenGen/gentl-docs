@@ -67,7 +67,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">gentl::mcmc Namespace Reference</div>  </div>
 </div><!--header-->
@@ -77,30 +78,33 @@ $(function() {
 Functions</h2></td></tr>
 <tr class="memitem:a71d9e4a384b8e8b8be193a4e69e7ab30"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#a71d9e4a384b8e8b8be193a4e69e7ab30">mh_accept_prob</a> (double model_log_weight, double proposal_forward_score, double proposal_backward_score)</td></tr>
 <tr class="separator:a71d9e4a384b8e8b8be193a4e69e7ab30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab296b1fc356e318433d3b2dccf657338"><td class="memTemplParams" colspan="2">template&lt;typename TraceType , typename ProposalTraceType , typename MakeProposalType , typename ProposalParametersType , typename RNGType &gt; </td></tr>
-<tr class="memitem:ab296b1fc356e318433d3b2dccf657338"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#ab296b1fc356e318433d3b2dccf657338">mh</a> (TraceType &amp;model_trace, const MakeProposalType &amp;make_proposal, ProposalParametersType &amp;proposal_params, RNGType &amp;rng, ProposalTraceType &amp;proposal_trace, bool precompute_gradient=false)</td></tr>
-<tr class="separator:ab296b1fc356e318433d3b2dccf657338"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44b9ec2e4c1a8ecd29da4af3c846344f"><td class="memTemplParams" colspan="2">template&lt;typename TraceType , typename MakeProposalType , typename ProposalParametersType , typename RNGType &gt; </td></tr>
-<tr class="memitem:a44b9ec2e4c1a8ecd29da4af3c846344f"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#a44b9ec2e4c1a8ecd29da4af3c846344f">mh_chain</a> (TraceType &amp;model_trace, const MakeProposalType &amp;make_proposal, ProposalParametersType &amp;proposal_params, size_t num_steps, RNGType &amp;rng)</td></tr>
-<tr class="separator:a44b9ec2e4c1a8ecd29da4af3c846344f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acccc21e70c82487dcbfadda1de4dfaf9"><td class="memTemplParams" colspan="2">template&lt;typename ModelTrace , typename ProposalTrace , typename Proposal , typename ProposalParams , typename RNGType &gt; </td></tr>
+<tr class="memitem:acccc21e70c82487dcbfadda1de4dfaf9"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#acccc21e70c82487dcbfadda1de4dfaf9">mh</a> (RNGType &amp;rng, ModelTrace &amp;model_trace, const Proposal &amp;proposal, ProposalParams &amp;proposal_params, ProposalTrace &amp;proposal_trace, bool precompute_gradient=false)</td></tr>
+<tr class="separator:acccc21e70c82487dcbfadda1de4dfaf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa635f3682d33a554901a5cc7c9236860"><td class="memTemplParams" colspan="2">template&lt;typename ChoiceBuffer , typename RNGType &gt; </td></tr>
 <tr class="memitem:aa635f3682d33a554901a5cc7c9236860"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#aa635f3682d33a554901a5cc7c9236860">mala_propose_values</a> (ChoiceBuffer &amp;proposal, const ChoiceBuffer &amp;current, const ChoiceBuffer &amp;gradient, double tau, RNGType &amp;rng)</td></tr>
 <tr class="separator:aa635f3682d33a554901a5cc7c9236860"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae55004175c3686b20e54fd1fd03e16e9"><td class="memTemplParams" colspan="2">template&lt;typename ChoiceBuffer &gt; </td></tr>
 <tr class="memitem:ae55004175c3686b20e54fd1fd03e16e9"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#ae55004175c3686b20e54fd1fd03e16e9">mala_assess</a> (const ChoiceBuffer &amp;proposed, const ChoiceBuffer &amp;current, const ChoiceBuffer &amp;gradient, double tau, ChoiceBuffer &amp;storage)</td></tr>
 <tr class="separator:ae55004175c3686b20e54fd1fd03e16e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5411d92e7d3ef8a1fba2f45e104863c4"><td class="memTemplParams" colspan="2">template&lt;typename TraceType , typename SelectionType , typename RNGType , typename ChoiceBufferType &gt; </td></tr>
-<tr class="memitem:a5411d92e7d3ef8a1fba2f45e104863c4"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#a5411d92e7d3ef8a1fba2f45e104863c4">mala</a> (TraceType &amp;trace, const SelectionType &amp;selection, double tau, ChoiceBufferType &amp;storage1, ChoiceBufferType &amp;storage2, RNGType &amp;rng)</td></tr>
-<tr class="separator:a5411d92e7d3ef8a1fba2f45e104863c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab984939fedfa2d2060ec60d05b7df42d"><td class="memTemplParams" colspan="2">template&lt;typename Trace , typename Selection , typename RNG , typename ChoiceBuffer &gt; </td></tr>
+<tr class="memitem:ab984939fedfa2d2060ec60d05b7df42d"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#ab984939fedfa2d2060ec60d05b7df42d">mala</a> (Trace &amp;trace, const Selection &amp;selection, double tau, ChoiceBuffer &amp;storage1, ChoiceBuffer &amp;storage2, RNG &amp;rng)</td></tr>
+<tr class="separator:ab984939fedfa2d2060ec60d05b7df42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a072ac10253d220a4b50ec2b1827ed5e9"><td class="memTemplParams" colspan="2">template&lt;typename ChoiceBufferType , typename RNGType &gt; </td></tr>
 <tr class="memitem:a072ac10253d220a4b50ec2b1827ed5e9"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#a072ac10253d220a4b50ec2b1827ed5e9">sample_momenta</a> (ChoiceBufferType &amp;momenta, RNGType &amp;rng)</td></tr>
 <tr class="separator:a072ac10253d220a4b50ec2b1827ed5e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75044f50e864ee9edfc3ac20619e3b44"><td class="memTemplParams" colspan="2">template&lt;typename ChoiceBufferType &gt; </td></tr>
 <tr class="memitem:a75044f50e864ee9edfc3ac20619e3b44"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#a75044f50e864ee9edfc3ac20619e3b44">assess_momenta</a> (const ChoiceBufferType &amp;momenta)</td></tr>
 <tr class="separator:a75044f50e864ee9edfc3ac20619e3b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:addfb4013c964b4b717deaf1c13163e7a"><td class="memTemplParams" colspan="2">template&lt;typename TraceType , typename SelectionType , typename RNGType , typename ChoiceBufferType &gt; </td></tr>
-<tr class="memitem:addfb4013c964b4b717deaf1c13163e7a"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#addfb4013c964b4b717deaf1c13163e7a">hmc</a> (TraceType &amp;trace, const SelectionType &amp;selection, size_t leapfrog_steps, double eps, ChoiceBufferType &amp;momenta_buffer, ChoiceBufferType &amp;values_buffer, RNGType &amp;rng)</td></tr>
-<tr class="separator:addfb4013c964b4b717deaf1c13163e7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0fdc5761b6a8d61e00f98a7b4a68ace"><td class="memTemplParams" colspan="2">template&lt;typename Trace , typename Selection , typename RNG , typename ChoiceBuffer &gt; </td></tr>
+<tr class="memitem:ab0fdc5761b6a8d61e00f98a7b4a68ace"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#ab0fdc5761b6a8d61e00f98a7b4a68ace">hmc</a> (Trace &amp;trace, const Selection &amp;selection, size_t leapfrog_steps, double eps, ChoiceBuffer &amp;momenta_buffer, ChoiceBuffer &amp;values_buffer, RNG &amp;rng)</td></tr>
+<tr class="separator:ab0fdc5761b6a8d61e00f98a7b4a68ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:adb4c4792a89b284cc2c1ce7d417aeca8"><td class="memTemplParams" colspan="2">template&lt;typename ModelTrace , typename ProposalTrace &gt; </td></tr>
+<tr class="memitem:adb4c4792a89b284cc2c1ce7d417aeca8"><td class="memTemplItemLeft" align="right" valign="top">concept&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#adb4c4792a89b284cc2c1ce7d417aeca8">MHProposalCompatible</a></td></tr>
+<tr class="separator:adb4c4792a89b284cc2c1ce7d417aeca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a75044f50e864ee9edfc3ac20619e3b44"></a>
@@ -123,24 +127,24 @@ template&lt;typename ChoiceBufferType &gt; </div>
 
 </div>
 </div>
-<a id="addfb4013c964b4b717deaf1c13163e7a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#addfb4013c964b4b717deaf1c13163e7a">&#9670;&nbsp;</a></span>hmc()</h2>
+<a id="ab0fdc5761b6a8d61e00f98a7b4a68ace"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0fdc5761b6a8d61e00f98a7b4a68ace">&#9670;&nbsp;</a></span>hmc()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename TraceType , typename SelectionType , typename RNGType , typename ChoiceBufferType &gt; </div>
+template&lt;typename Trace , typename Selection , typename RNG , typename ChoiceBuffer &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool gentl::mcmc::hmc </td>
           <td>(</td>
-          <td class="paramtype">TraceType &amp;&#160;</td>
+          <td class="paramtype">Trace &amp;&#160;</td>
           <td class="paramname"><em>trace</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const SelectionType &amp;&#160;</td>
+          <td class="paramtype">const Selection &amp;&#160;</td>
           <td class="paramname"><em>selection</em>, </td>
         </tr>
         <tr>
@@ -158,19 +162,19 @@ template&lt;typename TraceType , typename SelectionType , typename RNGType , typ
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ChoiceBufferType &amp;&#160;</td>
+          <td class="paramtype">ChoiceBuffer &amp;&#160;</td>
           <td class="paramname"><em>momenta_buffer</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ChoiceBufferType &amp;&#160;</td>
+          <td class="paramtype">ChoiceBuffer &amp;&#160;</td>
           <td class="paramname"><em>values_buffer</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RNGType &amp;&#160;</td>
+          <td class="paramtype">RNG &amp;&#160;</td>
           <td class="paramname"><em>rng</em>&#160;</td>
         </tr>
         <tr>
@@ -183,24 +187,24 @@ template&lt;typename TraceType , typename SelectionType , typename RNGType , typ
 
 </div>
 </div>
-<a id="a5411d92e7d3ef8a1fba2f45e104863c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5411d92e7d3ef8a1fba2f45e104863c4">&#9670;&nbsp;</a></span>mala()</h2>
+<a id="ab984939fedfa2d2060ec60d05b7df42d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab984939fedfa2d2060ec60d05b7df42d">&#9670;&nbsp;</a></span>mala()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename TraceType , typename SelectionType , typename RNGType , typename ChoiceBufferType &gt; </div>
+template&lt;typename Trace , typename Selection , typename RNG , typename ChoiceBuffer &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool gentl::mcmc::mala </td>
           <td>(</td>
-          <td class="paramtype">TraceType &amp;&#160;</td>
+          <td class="paramtype">Trace &amp;&#160;</td>
           <td class="paramname"><em>trace</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const SelectionType &amp;&#160;</td>
+          <td class="paramtype">const Selection &amp;&#160;</td>
           <td class="paramname"><em>selection</em>, </td>
         </tr>
         <tr>
@@ -212,19 +216,19 @@ template&lt;typename TraceType , typename SelectionType , typename RNGType , typ
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ChoiceBufferType &amp;&#160;</td>
+          <td class="paramtype">ChoiceBuffer &amp;&#160;</td>
           <td class="paramname"><em>storage1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ChoiceBufferType &amp;&#160;</td>
+          <td class="paramtype">ChoiceBuffer &amp;&#160;</td>
           <td class="paramname"><em>storage2</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RNGType &amp;&#160;</td>
+          <td class="paramtype">RNG &amp;&#160;</td>
           <td class="paramname"><em>rng</em>&#160;</td>
         </tr>
         <tr>
@@ -333,42 +337,42 @@ template&lt;typename ChoiceBuffer , typename RNGType &gt; </div>
 
 </div>
 </div>
-<a id="ab296b1fc356e318433d3b2dccf657338"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab296b1fc356e318433d3b2dccf657338">&#9670;&nbsp;</a></span>mh()</h2>
+<a id="acccc21e70c82487dcbfadda1de4dfaf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acccc21e70c82487dcbfadda1de4dfaf9">&#9670;&nbsp;</a></span>mh()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename TraceType , typename ProposalTraceType , typename MakeProposalType , typename ProposalParametersType , typename RNGType &gt; </div>
+template&lt;typename ModelTrace , typename ProposalTrace , typename Proposal , typename ProposalParams , typename RNGType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool gentl::mcmc::mh </td>
           <td>(</td>
-          <td class="paramtype">TraceType &amp;&#160;</td>
-          <td class="paramname"><em>model_trace</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const MakeProposalType &amp;&#160;</td>
-          <td class="paramname"><em>make_proposal</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ProposalParametersType &amp;&#160;</td>
-          <td class="paramname"><em>proposal_params</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">RNGType &amp;&#160;</td>
           <td class="paramname"><em>rng</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ProposalTraceType &amp;&#160;</td>
+          <td class="paramtype">ModelTrace &amp;&#160;</td>
+          <td class="paramname"><em>model_trace</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Proposal &amp;&#160;</td>
+          <td class="paramname"><em>proposal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ProposalParams &amp;&#160;</td>
+          <td class="paramname"><em>proposal_params</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ProposalTrace &amp;&#160;</td>
           <td class="paramname"><em>proposal_trace</em>, </td>
         </tr>
         <tr>
@@ -421,54 +425,6 @@ template&lt;typename TraceType , typename ProposalTraceType , typename MakePropo
 
 </div>
 </div>
-<a id="a44b9ec2e4c1a8ecd29da4af3c846344f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44b9ec2e4c1a8ecd29da4af3c846344f">&#9670;&nbsp;</a></span>mh_chain()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename TraceType , typename MakeProposalType , typename ProposalParametersType , typename RNGType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t gentl::mcmc::mh_chain </td>
-          <td>(</td>
-          <td class="paramtype">TraceType &amp;&#160;</td>
-          <td class="paramname"><em>model_trace</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const MakeProposalType &amp;&#160;</td>
-          <td class="paramname"><em>make_proposal</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ProposalParametersType &amp;&#160;</td>
-          <td class="paramname"><em>proposal_params</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>num_steps</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">RNGType &amp;&#160;</td>
-          <td class="paramname"><em>rng</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a072ac10253d220a4b50ec2b1827ed5e9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a072ac10253d220a4b50ec2b1827ed5e9">&#9670;&nbsp;</a></span>sample_momenta()</h2>
 
@@ -497,6 +453,26 @@ template&lt;typename ChoiceBufferType , typename RNGType &gt; </div>
       </table>
 </div><div class="memdoc">
 
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="adb4c4792a89b284cc2c1ce7d417aeca8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb4c4792a89b284cc2c1ce7d417aeca8">&#9670;&nbsp;</a></span>MHProposalCompatible</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ModelTrace , typename ProposalTrace &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">concept gentl::mcmc::MHProposalCompatible</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= requires(ModelTrace trace, ProposalTrace proposal_trace, std::mt19937 rng) {</div>
+<div class="line">    { trace.update(rng, gentl::change::no_change, proposal_trace.choices(gentl::selection::all), UpdateOptions()) };</div>
+<div class="line">}</div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
