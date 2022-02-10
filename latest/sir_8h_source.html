@@ -89,11 +89,11 @@ $(function() {
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define GENTL_SIR_H</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;random&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;gentl/concepts.h&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;gentl/types.h&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="concepts_8h.html">gentl/concepts.h</a>&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="types_8h.html">gentl/types.h</a>&gt;</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="mathutils_8h.html">gentl/util/mathutils.h</a>&gt;</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">using</span> gentl::GenerateOptions;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">using</span> <a class="code" href="classgentl_1_1GenerateOptions.html">gentl::GenerateOptions</a>;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="namespacegentl_1_1sir.html">   26</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacegentl_1_1sir.html">gentl::sir</a> {</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
@@ -108,7 +108,7 @@ $(function() {
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordtype">size_t</span> num_particles) {</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">if</span> (num_particles == 0)</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordflow">throw</span> std::logic_error(<span class="stringliteral">&quot;num_particles == 0&quot;</span>);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    GenerateOptions options;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classgentl_1_1GenerateOptions.html">GenerateOptions</a> options;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">auto</span> [trace_ptr, log_total_weight] = model.generate(rng, parameters, constraints, options);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">// generate another trace that will be used to generate all future traces in-place</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">auto</span> [candidate_trace_ptr, unused] = model.generate(rng, parameters, constraints, options);</div>
@@ -132,7 +132,10 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="anamespacegentl_1_1mathutils_html_a32a33f7b851ee042f2dc556c343093c7"><div class="ttname"><a href="namespacegentl_1_1mathutils.html#a32a33f7b851ee042f2dc556c343093c7">gentl::mathutils::logsumexp</a></div><div class="ttdeci">T logsumexp(const std::vector&lt; T &gt; &amp;values)</div><div class="ttdef"><b>Definition:</b> mathutils.h:22</div></div>
 <div class="ttc" id="amathutils_8h_html"><div class="ttname"><a href="mathutils_8h.html">mathutils.h</a></div></div>
+<div class="ttc" id="atypes_8h_html"><div class="ttname"><a href="types_8h.html">types.h</a></div></div>
+<div class="ttc" id="aclassgentl_1_1GenerateOptions_html"><div class="ttname"><a href="classgentl_1_1GenerateOptions.html">gentl::GenerateOptions</a></div><div class="ttdef"><b>Definition:</b> types.h:21</div></div>
 <div class="ttc" id="anamespacegentl_1_1sir_html_a8e7d92fc489e7e73b61cf17bd1f36066"><div class="ttname"><a href="namespacegentl_1_1sir.html#a8e7d92fc489e7e73b61cf17bd1f36066">gentl::sir::rolling_importance_resampling</a></div><div class="ttdeci">std::pair&lt; std::unique_ptr&lt; Trace &gt;, double &gt; rolling_importance_resampling(const Model &amp;model, Parameters &amp;parameters, const Constraints &amp;constraints, RNG &amp;rng, size_t num_particles)</div><div class="ttdef"><b>Definition:</b> sir.h:33</div></div>
+<div class="ttc" id="aconcepts_8h_html"><div class="ttname"><a href="concepts_8h.html">concepts.h</a></div></div>
 <div class="ttc" id="anamespacegentl_1_1sir_html"><div class="ttname"><a href="namespacegentl_1_1sir.html">gentl::sir</a></div><div class="ttdef"><b>Definition:</b> sir.h:26</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

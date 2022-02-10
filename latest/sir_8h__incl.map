@@ -1,7 +1,7 @@
 <map id="gentl/inference/sir.h" name="gentl/inference/sir.h">
 <area shape="rect" id="node1" title=" " alt="" coords="162,5,313,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,80,77,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="102,80,231,107"/>
-<area shape="rect" id="node4" title=" " alt="" coords="256,80,363,107"/>
+<area shape="rect" id="node3" href="$concepts_8h.html" title=" " alt="" coords="102,80,231,107"/>
+<area shape="rect" id="node4" href="$types_8h.html" title=" " alt="" coords="256,80,363,107"/>
 <area shape="rect" id="node5" href="$mathutils_8h.html" title=" " alt="" coords="387,80,546,107"/>
 </map>
