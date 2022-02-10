@@ -67,8 +67,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">gentl::mcmc Namespace Reference</div>  </div>
 </div><!--header-->
@@ -99,12 +98,6 @@ Functions</h2></td></tr>
 <tr class="memitem:ab0fdc5761b6a8d61e00f98a7b4a68ace"><td class="memTemplParams" colspan="2">template&lt;typename Trace , typename Selection , typename RNG , typename ChoiceBuffer &gt; </td></tr>
 <tr class="memitem:ab0fdc5761b6a8d61e00f98a7b4a68ace"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#ab0fdc5761b6a8d61e00f98a7b4a68ace">hmc</a> (Trace &amp;trace, const Selection &amp;selection, size_t leapfrog_steps, double eps, ChoiceBuffer &amp;momenta_buffer, ChoiceBuffer &amp;values_buffer, RNG &amp;rng)</td></tr>
 <tr class="separator:ab0fdc5761b6a8d61e00f98a7b4a68ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:adb4c4792a89b284cc2c1ce7d417aeca8"><td class="memTemplParams" colspan="2">template&lt;typename ModelTrace , typename ProposalTrace &gt; </td></tr>
-<tr class="memitem:adb4c4792a89b284cc2c1ce7d417aeca8"><td class="memTemplItemLeft" align="right" valign="top">concept&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#adb4c4792a89b284cc2c1ce7d417aeca8">MHProposalCompatible</a></td></tr>
-<tr class="separator:adb4c4792a89b284cc2c1ce7d417aeca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a75044f50e864ee9edfc3ac20619e3b44"></a>
@@ -453,26 +446,6 @@ template&lt;typename ChoiceBufferType , typename RNGType &gt; </div>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="adb4c4792a89b284cc2c1ce7d417aeca8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb4c4792a89b284cc2c1ce7d417aeca8">&#9670;&nbsp;</a></span>MHProposalCompatible</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ModelTrace , typename ProposalTrace &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">concept gentl::mcmc::MHProposalCompatible</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= requires(ModelTrace trace, ProposalTrace proposal_trace, std::mt19937 rng) {</div>
-<div class="line">    { trace.update(rng, gentl::change::no_change, proposal_trace.choices(gentl::selection::all), UpdateOptions()) };</div>
-<div class="line">}</div>
-</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->

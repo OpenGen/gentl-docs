@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['none_165',['none',['../namespacegentl_1_1modeling_1_1sequence_1_1modelchange.html#a683b90fb92fd57a3ded4bc712fdc38f4',1,'gentl::modeling::sequence::modelchange::none()'],['../namespacegentl_1_1modeling_1_1sequence_1_1valuechange.html#a3356c6c397327deea89f2d6e6ee169b9',1,'gentl::modeling::sequence::valuechange::none()']]]
+  ['unknown_164',['unknown',['../namespacegentl_1_1modeling_1_1sequence_1_1valuechange.html#ad2504ebdb59f41971e1fc29f54f97355',1,'gentl::modeling::sequence::valuechange']]]
 ];
