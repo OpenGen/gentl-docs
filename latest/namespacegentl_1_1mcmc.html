@@ -77,9 +77,15 @@ $(function() {
 Functions</h2></td></tr>
 <tr class="memitem:a71d9e4a384b8e8b8be193a4e69e7ab30"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#a71d9e4a384b8e8b8be193a4e69e7ab30">mh_accept_prob</a> (double model_log_weight, double proposal_forward_score, double proposal_backward_score)</td></tr>
 <tr class="separator:a71d9e4a384b8e8b8be193a4e69e7ab30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accd99ec824b65014cab115e600bf21b1"><td class="memTemplParams" colspan="2">template&lt;typename ProposalTrace , typename ModelTrace , typename Proposal , typename ProposalParams , typename Involution , typename RNG &gt; </td></tr>
+<tr class="memitem:accd99ec824b65014cab115e600bf21b1"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#accd99ec824b65014cab115e600bf21b1">involutive_mcmc</a> (RNG &amp;rng, ModelTrace &amp;trace, const Proposal &amp;proposal, const ProposalParams &amp;params, const Involution &amp;involution, bool round_trip_check=false)</td></tr>
+<tr class="separator:accd99ec824b65014cab115e600bf21b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acccc21e70c82487dcbfadda1de4dfaf9"><td class="memTemplParams" colspan="2">template&lt;typename ModelTrace , typename ProposalTrace , typename Proposal , typename ProposalParams , typename RNGType &gt; </td></tr>
 <tr class="memitem:acccc21e70c82487dcbfadda1de4dfaf9"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#acccc21e70c82487dcbfadda1de4dfaf9">mh</a> (RNGType &amp;rng, ModelTrace &amp;model_trace, const Proposal &amp;proposal, ProposalParams &amp;proposal_params, ProposalTrace &amp;proposal_trace, bool precompute_gradient=false)</td></tr>
 <tr class="separator:acccc21e70c82487dcbfadda1de4dfaf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6096cd498406fcf9f8f9685fb59e6564"><td class="memTemplParams" colspan="2">template&lt;typename ProposalTrace , typename ModelTrace , typename Proposal , typename ProposalParams , typename RNGType &gt; </td></tr>
+<tr class="memitem:a6096cd498406fcf9f8f9685fb59e6564"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#a6096cd498406fcf9f8f9685fb59e6564">mh</a> (RNGType &amp;rng, ModelTrace &amp;model_trace, const Proposal &amp;proposal, ProposalParams &amp;proposal_params, bool precompute_gradient=false)</td></tr>
+<tr class="separator:a6096cd498406fcf9f8f9685fb59e6564"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa635f3682d33a554901a5cc7c9236860"><td class="memTemplParams" colspan="2">template&lt;typename ChoiceBuffer , typename RNGType &gt; </td></tr>
 <tr class="memitem:aa635f3682d33a554901a5cc7c9236860"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#aa635f3682d33a554901a5cc7c9236860">mala_propose_values</a> (ChoiceBuffer &amp;proposal, const ChoiceBuffer &amp;current, const ChoiceBuffer &amp;gradient, double tau, RNGType &amp;rng)</td></tr>
 <tr class="separator:aa635f3682d33a554901a5cc7c9236860"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -169,6 +175,60 @@ template&lt;typename Trace , typename Selection , typename RNG , typename Choice
           <td></td>
           <td class="paramtype">RNG &amp;&#160;</td>
           <td class="paramname"><em>rng</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="accd99ec824b65014cab115e600bf21b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accd99ec824b65014cab115e600bf21b1">&#9670;&nbsp;</a></span>involutive_mcmc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ProposalTrace , typename ModelTrace , typename Proposal , typename ProposalParams , typename Involution , typename RNG &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gentl::mcmc::involutive_mcmc </td>
+          <td>(</td>
+          <td class="paramtype">RNG &amp;&#160;</td>
+          <td class="paramname"><em>rng</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ModelTrace &amp;&#160;</td>
+          <td class="paramname"><em>trace</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Proposal &amp;&#160;</td>
+          <td class="paramname"><em>proposal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const ProposalParams &amp;&#160;</td>
+          <td class="paramname"><em>params</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Involution &amp;&#160;</td>
+          <td class="paramname"><em>involution</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>round_trip_check</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -330,8 +390,56 @@ template&lt;typename ChoiceBuffer , typename RNGType &gt; </div>
 
 </div>
 </div>
+<a id="a6096cd498406fcf9f8f9685fb59e6564"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6096cd498406fcf9f8f9685fb59e6564">&#9670;&nbsp;</a></span>mh() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ProposalTrace , typename ModelTrace , typename Proposal , typename ProposalParams , typename RNGType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gentl::mcmc::mh </td>
+          <td>(</td>
+          <td class="paramtype">RNGType &amp;&#160;</td>
+          <td class="paramname"><em>rng</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ModelTrace &amp;&#160;</td>
+          <td class="paramname"><em>model_trace</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Proposal &amp;&#160;</td>
+          <td class="paramname"><em>proposal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ProposalParams &amp;&#160;</td>
+          <td class="paramname"><em>proposal_params</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>precompute_gradient</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="acccc21e70c82487dcbfadda1de4dfaf9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acccc21e70c82487dcbfadda1de4dfaf9">&#9670;&nbsp;</a></span>mh()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#acccc21e70c82487dcbfadda1de4dfaf9">&#9670;&nbsp;</a></span>mh() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

@@ -1,9 +1,11 @@
 <map id="gentl/learning/supervised.h" name="gentl/learning/supervised.h">
-<area shape="rect" id="node1" title=" " alt="" coords="162,5,361,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="254,5,453,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,80,75,107"/>
 <area shape="rect" id="node3" title=" " alt="" coords="99,80,162,107"/>
 <area shape="rect" id="node4" title=" " alt="" coords="186,80,246,107"/>
 <area shape="rect" id="node5" title=" " alt="" coords="271,80,343,107"/>
 <area shape="rect" id="node6" title=" " alt="" coords="367,80,433,107"/>
 <area shape="rect" id="node7" title=" " alt="" coords="457,80,599,107"/>
+<area shape="rect" id="node8" href="$types_8h.html" title=" " alt="" coords="624,80,731,107"/>
+<area shape="rect" id="node9" href="$concepts_8h.html" title=" " alt="" coords="755,80,885,107"/>
 </map>
