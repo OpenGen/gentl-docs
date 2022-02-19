@@ -126,7 +126,7 @@ Semantics</h2>
 <p>The semantics below assumes that samples are mathematical objects called <b>choice dictionaries</b>. (Note that some of the features in GenTL do not require that samples have this structure, but we document it here for concreteness.) A choice dictionary is a finite map from the <b>address</b> of a random choice to its <b>value</b>. See <a href="https://www.mct.dev/assets/mct-thesis.pdf">Chapter 2 and Chapter 4 of this PhD thesis</a> for a mathematical definition of generative functions and traces over choice dictionaries. We will assume that all random choices are discrete. We use the notation from that thesis below (we will denote choice dictionaries using the variables \(\tt\), \(\uu\), and \(\ss\), and a probability distribution on choice dictionaries is denoted \(p\), with probability density (mass) for dictionary \(\tt\) denoted \(p(\tt)\)). Also see the <a href="https://arxiv.org/abs/2007.09871">Involutive MCMC paper</a> for a formulation of choice dictionaries.</p>
 <h2><a class="anchor" id="autotoc_md6"></a>
 Distribution interface member functions</h2>
-<p>Each distribution object is associated with some trace type, which we will call <code>Trace</code> in the documentation that follows. Note that GenTL does not contain any abstract class <code>Trace</code>.</p>
+<p>Each distribution object is associated with some trace type, which we will call <code>Trace</code> in the documentation that follows. Note that GenTL does not contain any abstract class <code>Trace</code>. Similarly, the other types used below, including <code>RNG</code>, <code>ParameterStore</code>, <code>ChoiceBuffer</code>, <code>GradientAccumulator</code>, and <code>Selection</code>, do not refer to abstract classes. GenTL functions use template parameters for all of these types. With the exception of <code>RNG</code> these types are expected to be user-defined.</p>
 <h4 id="simulate">simulate</h4>
 <div class="fragment"><div class="line">std::unique_ptr&lt;Trace&gt; simulate(RNG&amp; rng, ParameterStore&amp; params, const SimulateOptions&amp; options) const;</div>
 </div><!-- fragment --><p>Sample \( \tt \sim p \) and return a new trace object containing \(\tt\).</p>
@@ -149,6 +149,11 @@ Trace interface member functions</h2>
 </div><!-- fragment --><p>TODO: document math</p>
 <p>Also see <a class="el" href="classgentl_1_1UpdateOptions.html">gentl::UpdateOptions</a>.</p>
 <p>The MCMC functionality in <a class="el" href="namespacegentl_1_1mcmc.html">gentl::mcmc</a> requires that an overload of <code>update</code> is provided for <code>Change</code> equal to <a class="el" href="structgentl_1_1change_1_1NoChange.html">gentl::change::NoChange</a>`.</p>
+<h4 id="backward_constraints">backward_constraints</h4>
+<p>TODO: this should probably be moved to be an additional return value from <code>update</code>, since it's return type may depend on the type of the constraints passed to <code>update</code>. Users should be permitted to implement multiple variants of <code>update</code> that accept different choice buffer types and return different choice buffer types as backward constraints.</p>
+<div class="fragment"><div class="line">const ChoiceBuffer&amp; backward_constraints();</div>
+</div><!-- fragment --><p>TODO: document math (this corresponds to the 'discard' object in Gen.jl).</p>
+<p>The reference is invalidated by a subsequent call to <code>update</code> or <code>revert</code>.</p>
 <h4 id="return_value">return_value</h4>
 <div class="fragment"><div class="line">const Return&amp; return_value() const;</div>
 </div><!-- fragment --><p>Return \( f(\tt) \). The reference is invalidated by a subsequent call to <code>update</code> or <code>revert</code>.</p>
@@ -177,7 +182,7 @@ Generative function interface member functions</h2>
 <p>A generative function is an object that is callable for some input type, and then, when called with any value of its input type, returns a distribution that produces traces of a given fixed type.</p>
 <h2><a class="anchor" id="autotoc_md9"></a>
 Parameter store and gradient accumulator member functions</h2>
-<p>Parameter stores contain the state \(\theta\) of some learnable parameters and the state of their gradient. provide A parameter store type <code>Parameters</code> must provide <code>typename Parameters::accumulator_t</code>, and the accumulator type must have a constructor that takes a <code>Parameters</code> object as its only argument. The gradient values are initialized to zero, and are accumulated by calling the <code>update_gradient()</code> member function on a gradient accumulator object. The indirection between parameter stores and gradient accumulators is meant to facilitate multi-threaded gradient-based algorithms inwhich different threads accumulate gradients in parallel in thread-local gradient accumulators.</p>
+<p>Parameter stores contain the state \(\theta\) of some learnable parameters and the state of their gradient. provide A parameter store type <code>ParameterStore</code> must provide <code>typename ParameterStore::accumulator_t</code>, and the accumulator type must have a constructor that takes a <code>ParameterStore</code> object as its only argument. The gradient values are initialized to zero, and are accumulated by calling the <code>update_gradient()</code> member function on a gradient accumulator object. The indirection between parameter stores and gradient accumulators is meant to facilitate multi-threaded gradient-based algorithms inwhich different threads accumulate gradients in parallel in thread-local gradient accumulators.</p>
 <h1><a class="anchor" id="autotoc_md10"></a>
 Functionality</h1>
 <p>Distribution, trace, and generative function types that implement the above interface (or certain subsets of the interface) can be used with the following GenTL features:</p>
