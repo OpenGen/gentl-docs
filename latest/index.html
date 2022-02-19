@@ -116,69 +116,44 @@ Trace objects</h2>
 Generative function objects</h2>
 <p>Generative function objects are callable objects that, when called on a single argument (called the <b>input</b>), return a distribution object.</p>
 <p>Generative functions are compositional building blocks of generative models that behave like mathematical functions (from their input to the return value of the trace that they generate), but they are stochastic (due to the random value of their sample). If you want your generative model to be resuable as a building block within other generative models, then you should implement a generative function for it. For models that are represented as generative functions, there is a dependency between the change objects that can be passed to the <code>update</code> function of a trace, and the set of valid inputs to the generative function from which the trace originated: <code>update</code> must accept change objects that encode a change of the input to the generative function to any valid input value.</p>
-<h1><a class="anchor" id="autotoc_md4"></a>
+<div id="interface"> </div><h1><a class="anchor" id="autotoc_md4"></a>
 Interface documentation</h1>
-<p>This section describes the member functions that are expected by GenTL for user-defined types that represent distributions, traces, generative functions, and the other auxiliary types. The requirements that GenTL places on user-defined types are defined in <a class="el" href="concepts_8h.html">include/gentl/concepts.h</a> as C++20 <a href="https://en.wikipedia.org/wiki/Concepts_(C%2B%2B)">concepts</a> (they will not be checked by the compiler if the compiler does not support Concepts, but they still serve as documentation).</p>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<div id="interface"> This section describes the member functions that are expected by GenTL for user-defined types that represent distributions, traces, generative functions, and the other auxiliary types. The requirements that GenTL places on user-defined types are defined in <a class="el" href="concepts_8h.html">include/gentl/concepts.h</a> as C++20 <a href="https://en.wikipedia.org/wiki/Concepts_(C%2B%2B)">concepts</a> (they will not be checked by the compiler if the compiler does not support Concepts, but they still serve as documentation).</div><div id="interface"></div><h2><a class="anchor" id="autotoc_md5"></a>
 Semantics</h2>
-<p>TODO: document encapsulated randomness</p>
-<p>$$ \def\ss{{\boldsymbol{\sigma}}} \def\uu{{\boldsymbol{\upsilon}}} \def\tt{{\boldsymbol{\tau}}} $$</p>
-<p>The semantics below assumes that samples are mathematical objects called <b>choice dictionaries</b>. (Note that some of the features in GenTL do not require that samples have this structure, but we document it here for concreteness.) A choice dictionary is a finite map from the <b>address</b> of a random choice to its <b>value</b>. See <a href="https://www.mct.dev/assets/mct-thesis.pdf">Chapter 2 and Chapter 4 of this PhD thesis</a> for a mathematical definition of generative functions and traces over choice dictionaries. We will assume that all random choices are discrete. We use the notation from that thesis below (we will denote choice dictionaries using the variables \(\tt\), \(\uu\), and \(\ss\), and a probability distribution on choice dictionaries is denoted \(p\), with probability density (mass) for dictionary \(\tt\) denoted \(p(\tt)\)). Also see the <a href="https://arxiv.org/abs/2007.09871">Involutive MCMC paper</a> for a formulation of choice dictionaries.</p>
-<h2><a class="anchor" id="autotoc_md6"></a>
+<div id="interface"> TODO: document encapsulated randomness</div><div id="interface">$$ \def\ss{{\boldsymbol{\sigma}}} \def\uu{{\boldsymbol{\upsilon}}} \def\tt{{\boldsymbol{\tau}}} $$</div><div id="interface">The semantics below assumes that samples are mathematical objects called <b>choice dictionaries</b>. (Note that some of the features in GenTL do not require that samples have this structure, but we document it here for concreteness.) A choice dictionary is a finite map from the <b>address</b> of a random choice to its <b>value</b>. See <a href="https://www.mct.dev/assets/mct-thesis.pdf">Chapter 2 and Chapter 4 of this PhD thesis</a> for a mathematical definition of generative functions and traces over choice dictionaries. We will assume that all random choices are discrete. We use the notation from that thesis below (we will denote choice dictionaries using the variables \(\tt\), \(\uu\), and \(\ss\), and a probability distribution on choice dictionaries is denoted \(p\), with probability density (mass) for dictionary \(\tt\) denoted \(p(\tt)\)). Also see the <a href="https://arxiv.org/abs/2007.09871">Involutive MCMC paper</a> for a formulation of choice dictionaries.</div><div id="interface"></div><h2><a class="anchor" id="autotoc_md6"></a>
 Distribution interface member functions</h2>
-<p>Each distribution object is associated with some trace type, which we will call <code>Trace</code> in the documentation that follows. Note that GenTL does not contain any abstract class <code>Trace</code>.</p>
-<h4 id="simulate">simulate</h4>
-<div class="fragment"><div class="line">std::unique_ptr&lt;Trace&gt; simulate(RNG&amp; rng, ParameterStore&amp; params, const SimulateOptions&amp; options) const;</div>
-</div><!-- fragment --><p>Sample \( \tt \sim p \) and return a new trace object containing \(\tt\).</p>
-<p>There is also an in-place variant that over-writes an existing trace object:</p>
-<div class="fragment"><div class="line">void simulate(RNG&amp; rng, ParameterStore&amp; params, const SimulateOptions&amp; options, Trace&amp; trace) const;</div>
-</div><!-- fragment --><p>Also see <a class="el" href="classgentl_1_1SimulateOptions.html">gentl::SimulateOptions</a>.</p>
-<h4 id="generate">generate</h4>
-<div class="fragment"><div class="line">std::pair&lt;std::unique_ptr&lt;Trace&gt;, double&gt; simulate(RNG&amp; rng, ParameterStore&amp; params, const ChoiceBuffer&amp; constraint, const GenerateOptions&amp; options) const;</div>
-</div><!-- fragment --><p>Given constraint \( \ss \), sample \( \uu\sim q(\cdot; \ss) \) and return a new trace object containing \(\tt := \ss \oplus \uu\).</p>
-<p>There is also an in-place variant that over-writes an existing trace object:</p>
-<div class="fragment"><div class="line">double generate(RNG&amp; rng, ParameterStore&amp; params, const ChoiceBuffer&amp; constraint, const GenerateOptions&amp; options, Trace&amp; trace) const;</div>
-</div><!-- fragment --><p>Also see <a class="el" href="classgentl_1_1GenerateOptions.html">gentl::GenerateOptions</a>.</p>
-<h2><a class="anchor" id="autotoc_md7"></a>
+<div id="interface"> Each distribution object is associated with some trace type, which we will call <code>Trace</code> in the documentation that follows. Note that GenTL does not contain any abstract class <code>Trace</code>.</div><div id="interface"><h4 id="simulate">simulate</h4>
+</div><div id="interface"></div><div id="interface"><div class="fragment"><div class="line">std::unique_ptr&lt;Trace&gt; simulate(RNG&amp; rng, ParameterStore&amp; params, const SimulateOptions&amp; options) const;</div>
+</div><!-- fragment --></div><div id="interface">Sample \( \tt \sim p \) and return a new trace object containing \(\tt\).</div><div id="interface">There is also an in-place variant that over-writes an existing trace object:</div><div id="interface"><div class="fragment"><div class="line">void simulate(RNG&amp; rng, ParameterStore&amp; params, const SimulateOptions&amp; options, Trace&amp; trace) const;</div>
+</div><!-- fragment --></div><div id="interface">Also see <a class="el" href="classgentl_1_1SimulateOptions.html">gentl::SimulateOptions</a>.</div><div id="interface"><h4 id="generate">generate</h4>
+</div><div id="interface"></div><div id="interface"><div class="fragment"><div class="line">std::pair&lt;std::unique_ptr&lt;Trace&gt;, double&gt; simulate(RNG&amp; rng, ParameterStore&amp; params, const ChoiceBuffer&amp; constraint, const GenerateOptions&amp; options) const;</div>
+</div><!-- fragment --></div><div id="interface">Given constraint \( \ss \), sample \( \uu\sim q(\cdot; \ss) \) and return a new trace object containing \(\tt := \ss \oplus \uu\).</div><div id="interface">There is also an in-place variant that over-writes an existing trace object:</div><div id="interface"><div class="fragment"><div class="line">double generate(RNG&amp; rng, ParameterStore&amp; params, const ChoiceBuffer&amp; constraint, const GenerateOptions&amp; options, Trace&amp; trace) const;</div>
+</div><!-- fragment --></div><div id="interface">Also see <a class="el" href="classgentl_1_1GenerateOptions.html">gentl::GenerateOptions</a>.</div><div id="interface"></div><h2><a class="anchor" id="autotoc_md7"></a>
 Trace interface member functions</h2>
-<h4 id="score">score</h4>
-<div class="fragment"><div class="line">double score() const;</div>
-</div><!-- fragment --><p>Return \( \log p(\tt) \).</p>
-<h4 id="update">update</h4>
-<div class="fragment"><div class="line">double update(RNG&amp; rng, const Change&amp; change, const ChoiceBuffer&amp; constraint, const UpdateOptions&amp; options);</div>
-</div><!-- fragment --><p>TODO: document math</p>
-<p>Also see <a class="el" href="classgentl_1_1UpdateOptions.html">gentl::UpdateOptions</a>.</p>
-<p>The MCMC functionality in <a class="el" href="namespacegentl_1_1mcmc.html">gentl::mcmc</a> requires that an overload of <code>update</code> is provided for <code>Change</code> equal to <a class="el" href="structgentl_1_1change_1_1NoChange.html">gentl::change::NoChange</a>`.</p>
-<h4 id="return_value">return_value</h4>
-<div class="fragment"><div class="line">const Return&amp; return_value() const;</div>
-</div><!-- fragment --><p>Return \( f(\tt) \). The reference is invalidated by a subsequent call to <code>update</code> or <code>revert</code>.</p>
-<h4 id="return_value_change">return_value_change</h4>
-<div class="fragment"><div class="line">const ReturnChange&amp; return_value_change() const;</div>
-</div><!-- fragment --><p>The reference is invalidated by a subsequent call to <code>update</code> or <code>revert</code>.</p>
-<h4 id="revert">revert</h4>
-<div class="fragment"><div class="line">void revert();</div>
-</div><!-- fragment --><p>Undo an <code>update</code> for which the <code>save</code> flag option was set. Once reverted, a trace cannot be reverted again until after another call to <code>update</code>.</p>
-<h4 id="fork">fork</h4>
-<div class="fragment"><div class="line">std::unique_ptr&lt;Trace&gt; fork();</div>
-</div><!-- fragment --><p>Return a copy of the trace. Future updates to <code>this</code> do not effect the returned trace, and vice versa.</p>
-<h4 id="fork_from">fork_from</h4>
-<div class="fragment"><div class="line">void fork_from(const Trace&amp; other);</div>
-</div><!-- fragment --><p>Overwrite the contest of the <code>this</code> to contain a copy of the contents of <code>other</code>. Future updates to <code>this</code> do not effect the returned trace, and vice versa.</p>
-<h4 id="choice_gradient">choice_gradient</h4>
-<div class="fragment"><div class="line">const ChoiceBuffer&amp; choice_gradient(const Selection&amp; selection)</div>
-</div><!-- fragment --><p>Return a reference to a choice buffer containing the gradient of \(\log p(\tt)\) with respect to the values of the selected choices. The reference is invalidated by a subsequent call to <code>update</code> or <code>revert</code>.</p>
-<div class="fragment"><div class="line">InputGradient choice_gradient(const Selection&amp; selection, const RetGradient&amp;)</div>
-</div><!-- fragment --><p>Compositional variant designed for use with reverse-mode automatic differentiation.</p>
-<h4 id="parameter_gradient">parameter_gradient</h4>
-<div class="fragment"><div class="line">void parameter_gradient(GradientAccumulator&amp; accum, double scaler=1.0)</div>
-</div><!-- fragment --><p>Increment the gradient accumulator by \(\alpha \cdot \nabla_{\theta} \log p(\tt)\)where \(\alpha\) is the value of <code>scaler</code>.</p>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<div id="interface"> <h4 id="score">score</h4>
+</div><div id="interface"></div><div id="interface"><div class="fragment"><div class="line">double score() const;</div>
+</div><!-- fragment --></div><div id="interface">Return \( \log p(\tt) \).</div><div id="interface"><h4 id="update">update</h4>
+</div><div id="interface"></div><div id="interface"><div class="fragment"><div class="line">double update(RNG&amp; rng, const Change&amp; change, const ChoiceBuffer&amp; constraint, const UpdateOptions&amp; options);</div>
+</div><!-- fragment --></div><div id="interface">TODO: document math</div><div id="interface">Also see <a class="el" href="classgentl_1_1UpdateOptions.html">gentl::UpdateOptions</a>.</div><div id="interface">The MCMC functionality in <a class="el" href="namespacegentl_1_1mcmc.html">gentl::mcmc</a> requires that an overload of <code>update</code> is provided for <code>Change</code> equal to <a class="el" href="structgentl_1_1change_1_1NoChange.html">gentl::change::NoChange</a>`.</div><div id="interface"><h4 id="return_value">return_value</h4>
+</div><div id="interface"></div><div id="interface"><div class="fragment"><div class="line">const Return&amp; return_value() const;</div>
+</div><!-- fragment --></div><div id="interface">Return \( f(\tt) \). The reference is invalidated by a subsequent call to <code>update</code> or <code>revert</code>.</div><div id="interface"><h4 id="return_value_change">return_value_change</h4>
+</div><div id="interface"></div><div id="interface"><div class="fragment"><div class="line">const ReturnChange&amp; return_value_change() const;</div>
+</div><!-- fragment --></div><div id="interface">The reference is invalidated by a subsequent call to <code>update</code> or <code>revert</code>.</div><div id="interface"><h4 id="revert">revert</h4>
+</div><div id="interface"></div><div id="interface"><div class="fragment"><div class="line">void revert();</div>
+</div><!-- fragment --></div><div id="interface">Undo an <code>update</code> for which the <code>save</code> flag option was set. Once reverted, a trace cannot be reverted again until after another call to <code>update</code>.</div><div id="interface"><h4 id="fork">fork</h4>
+</div><div id="interface"></div><div id="interface"><div class="fragment"><div class="line">std::unique_ptr&lt;Trace&gt; fork();</div>
+</div><!-- fragment --></div><div id="interface">Return a copy of the trace. Future updates to <code>this</code> do not effect the returned trace, and vice versa.</div><div id="interface"><h4 id="fork_from">fork_from</h4>
+</div><div id="interface"></div><div id="interface"><div class="fragment"><div class="line">void fork_from(const Trace&amp; other);</div>
+</div><!-- fragment --></div><div id="interface">Overwrite the contest of the <code>this</code> to contain a copy of the contents of <code>other</code>. Future updates to <code>this</code> do not effect the returned trace, and vice versa.</div><div id="interface"><h4 id="choice_gradient">choice_gradient</h4>
+</div><div id="interface"></div><div id="interface"><div class="fragment"><div class="line">const ChoiceBuffer&amp; choice_gradient(const Selection&amp; selection)</div>
+</div><!-- fragment --></div><div id="interface">Return a reference to a choice buffer containing the gradient of \(\log p(\tt)\) with respect to the values of the selected choices. The reference is invalidated by a subsequent call to <code>update</code> or <code>revert</code>.</div><div id="interface"><div class="fragment"><div class="line">InputGradient choice_gradient(const Selection&amp; selection, const RetGradient&amp;)</div>
+</div><!-- fragment --></div><div id="interface">Compositional variant designed for use with reverse-mode automatic differentiation.</div><div id="interface"><h4 id="parameter_gradient">parameter_gradient</h4>
+</div><div id="interface"></div><div id="interface"><div class="fragment"><div class="line">void parameter_gradient(GradientAccumulator&amp; accum, double scaler=1.0)</div>
+</div><!-- fragment --></div><div id="interface">Increment the gradient accumulator by \(\alpha \cdot \nabla_{\theta} \log p(\tt)\)where \(\alpha\) is the value of <code>scaler</code>.</div><div id="interface"></div><h2><a class="anchor" id="autotoc_md8"></a>
 Generative function interface member functions</h2>
-<p>A generative function is an object that is callable for some input type, and then, when called with any value of its input type, returns a distribution that produces traces of a given fixed type.</p>
-<h2><a class="anchor" id="autotoc_md9"></a>
+<div id="interface"> A generative function is an object that is callable for some input type, and then, when called with any value of its input type, returns a distribution that produces traces of a given fixed type.</div><div id="interface"></div><h2><a class="anchor" id="autotoc_md9"></a>
 Parameter store and gradient accumulator member functions</h2>
-<p>Parameter stores contain the state \(\theta\) of some learnable parameters and the state of their gradient. provide A parameter store type <code>Parameters</code> must provide <code>typename Parameters::accumulator_t</code>, and the accumulator type must have a constructor that takes a <code>Parameters</code> object as its only argument. The gradient values are initialized to zero, and are accumulated by calling the <code>update_gradient()</code> member function on a gradient accumulator object. The indirection between parameter stores and gradient accumulators is meant to facilitate multi-threaded gradient-based algorithms inwhich different threads accumulate gradients in parallel in thread-local gradient accumulators.</p>
-<h1><a class="anchor" id="autotoc_md10"></a>
+<div id="interface"> Parameter stores contain the state \(\theta\) of some learnable parameters and the state of their gradient. provide A parameter store type <code>Parameters</code> must provide <code>typename Parameters::accumulator_t</code>, and the accumulator type must have a constructor that takes a <code>Parameters</code> object as its only argument. The gradient values are initialized to zero, and are accumulated by calling the <code>update_gradient()</code> member function on a gradient accumulator object. The indirection between parameter stores and gradient accumulators is meant to facilitate multi-threaded gradient-based algorithms inwhich different threads accumulate gradients in parallel in thread-local gradient accumulators.</div><div id="interface"></div><h1><a class="anchor" id="autotoc_md10"></a>
 Functionality</h1>
 <p>Distribution, trace, and generative function types that implement the above interface (or certain subsets of the interface) can be used with the following GenTL features:</p>
 <h2><a class="anchor" id="autotoc_md11"></a>
