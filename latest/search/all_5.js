@@ -7,7 +7,7 @@ var searchData=
   ['generate_5fminibatch_22',['generate_minibatch',['../namespacegentl_1_1sgd.html#a604b8b9483d4169bc0077feb50120c69',1,'gentl::sgd']]],
   ['generateoptions_23',['GenerateOptions',['../classgentl_1_1GenerateOptions.html',1,'gentl::GenerateOptions'],['../classgentl_1_1GenerateOptions.html#a451968429e503c3c272563e214d3a94f',1,'gentl::GenerateOptions::GenerateOptions()']]],
   ['gentl_24',['gentl',['../namespacegentl.html',1,'']]],
-  ['gen_20inference_20and_20learning_20template_20library_20_28gentl_7d_25',['Gen Inference and Learning Template Library (GenTL}',['../index.html',1,'']]],
+  ['gen_20inference_20and_20learning_20template_20library_20_28gentl_29_25',['Gen Inference and Learning Template Library (GenTL)',['../index.html',1,'']]],
   ['mathutils_26',['mathutils',['../namespacegentl_1_1mathutils.html',1,'gentl']]],
   ['mcmc_27',['mcmc',['../namespacegentl_1_1mcmc.html',1,'gentl']]],
   ['modelchange_28',['modelchange',['../namespacegentl_1_1modeling_1_1sequence_1_1modelchange.html',1,'gentl::modeling::sequence']]],

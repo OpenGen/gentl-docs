@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "ams.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -103,9 +110,6 @@ Namespaces</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a71d9e4a384b8e8b8be193a4e69e7ab30"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#a71d9e4a384b8e8b8be193a4e69e7ab30">gentl::mcmc::mh_accept_prob</a> (double model_log_weight, double proposal_forward_score, double proposal_backward_score)</td></tr>
 <tr class="separator:a71d9e4a384b8e8b8be193a4e69e7ab30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:accd99ec824b65014cab115e600bf21b1"><td class="memTemplParams" colspan="2">template&lt;typename ProposalTrace , typename ModelTrace , typename Proposal , typename ProposalParams , typename Involution , typename RNG &gt; </td></tr>
-<tr class="memitem:accd99ec824b65014cab115e600bf21b1"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#accd99ec824b65014cab115e600bf21b1">gentl::mcmc::involutive_mcmc</a> (RNG &amp;rng, ModelTrace &amp;trace, const Proposal &amp;proposal, const ProposalParams &amp;params, const Involution &amp;involution, bool round_trip_check=false)</td></tr>
-<tr class="separator:accd99ec824b65014cab115e600bf21b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acccc21e70c82487dcbfadda1de4dfaf9"><td class="memTemplParams" colspan="2">template&lt;typename ModelTrace , typename ProposalTrace , typename Proposal , typename ProposalParams , typename RNGType &gt; </td></tr>
 <tr class="memitem:acccc21e70c82487dcbfadda1de4dfaf9"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegentl_1_1mcmc.html#acccc21e70c82487dcbfadda1de4dfaf9">gentl::mcmc::mh</a> (RNGType &amp;rng, ModelTrace &amp;model_trace, const Proposal &amp;proposal, ProposalParams &amp;proposal_params, ProposalTrace &amp;proposal_trace, bool precompute_gradient=false)</td></tr>
 <tr class="separator:acccc21e70c82487dcbfadda1de4dfaf9"><td class="memSeparator" colspan="2">&#160;</td></tr>

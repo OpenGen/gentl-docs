@@ -5,13 +5,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>GenTL: Gen Inference and Learning Template Library (GenTL}</title>
+<title>GenTL: Gen Inference and Learning Template Library (GenTL)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "ams.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -63,108 +70,150 @@ $(function() {
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Gen Inference and Learning Template Library (GenTL} </div>  </div>
+<div class="title">Gen Inference and Learning Template Library (GenTL) </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This documentation is a work-in-progress.</p>
+<div class="textblock"><p>Applying probabilistic modeling, inference, and learning is made easier by a separation of concerns between the definition of a probabilistic model and the implementation of inference and learning algorithms that operate on the model. One approach to achieving this separation is to define an interface that a probabilistic model should implement, and then write inference and learning algorithms that only interact with the model through that interface. The GenTL library provides high-level building blocks for implementing inference and learning algorithms that can be applied to probabilistic models that implement a specific interface. GenTL includes template functions and template classes whose template parameters are user-defined types that implement the interface for the user's probabilistic model. Different features of GenTL require different (but overlapping) functions to be defined for these user-defined types, and it is not often necessary to implement all of the functionality required by all GenTL features.</p>
+<p>GenTL is designed to be used with either hand-coded user-defined types for a probabilistic model, or types that use probabilistic programming languages to automatically implement the functionality in the interface. Implementing your model in a probabilistic programming language that is compatible with GenTL may be an appropriate first step in the development process, because iterating on the model is faster, there is less code required, and iterating on the inference algorithm is easier since the probabilistic programming language will (ideally) implement the full interface required by any inference and learning features within GenTL. After implementing the model using a probabilistic programming language, you can optimize performance by re-implementing the types by hand, without having to rewrite the GenTL-based inference and learning code. It is also possible to incrementally migrate parts of the model from a probabilistic programming based implementation to a custom implementation, if the probabilistic programming language can invoke 'foreign' probabilistic programs that implement GenTL's interfaces.</p>
 <h1><a class="anchor" id="autotoc_md0"></a>
-Concepts</h1>
-<p>See <a class="el" href="concepts_8h.html">include/gentl/concepts.h</a> for a formal definition of these concepts.</p>
-<p>Using GenTL typically involves defining your own types that adhere to a set of concepts. Note that there is no abstract class for each of these concepts in GenTL (i.e. there is no general abstract <code>Trace</code> class).</p>
+Distributions, traces, and generative functions</h1>
+<p>There are three main types of objects that together constitute a probabilistic model that can be used with GenTL.</p>
+<ul>
+<li>Objects that represent a joint probability distribution over some random variables (GenTL also can be used with distributions over measure spaces with variable-dimension). These objects are called <b>distributions</b>.</li>
+<li>Objects that represent a sample from such a probability distribution. These objects are called <b>traces</b>.</li>
+<li>Objects that are callable, and when called return a distribution. These objects are called <b>generative functions</b>.</li>
+</ul>
+<p>There are also other auxiliary types of objects that are used in the interface:</p>
+<ul>
+<li>Objects that represent changes to a value (<b>changes</b>).</li>
+<li>Objects that represent values of some subset of random variables in a random sample (<b>choice buffers</b>).</li>
+<li>Objects that contain values for learnable parameters of a distribution (<b>parameter stores</b>).</li>
+<li>Objects that contain gradient accumulators for learnable parameters of a distribution (<b>gradient accumulators</b>).</li>
+<li>Objects that represent selections of some part of a (joint) sample value (<b>selections</b>).</li>
+</ul>
 <h2><a class="anchor" id="autotoc_md1"></a>
-GenerativeFunction</h2>
-<p>An object whose call operator <code>()</code> returns a BoundGenerativeFunction.</p>
-<p>The type of the argument to this operator is related to the InputGradient and InputChange types.</p>
+Distribution objects</h2>
+<p>Distribution objects may implement two different techniques for sampling traces, implemented in the interface functions called <code>simulate</code> and <code>generate</code>. Briefly:</p>
+<ul>
+<li>The <a href="#simulate"><code>simulate</code></a> member function samples a trace exactly from the (joint) distribution.</li>
+<li>The <a href="#generate"><code>generate</code></a> member function samples a trace from an alternative distribution defined by the distribution object (optionally subject to constraints on the sample) and also returns an importance weight relating the joint distribution to the sampling distribution. The constraints on the sample are represented by a <b>choice buffer</b>.</li>
+</ul>
+<p>Note that importance weights, densities, and other ratios of densities, are always returned in log-space.</p>
 <h2><a class="anchor" id="autotoc_md2"></a>
-BoundGenerativeFunction</h2>
-<p>An object that is capable of generating a Trace, given a random number generator (RNG), a ParameterStore object, and optionally a ChoiceBuffer that describes constraints that the resulting Trace should satisfy.</p>
-<p>There are two template member functions that are used to obtain Traces:</p>
-<p>Sample from the joint distribution, and optionally compute and cache gradients with respect to trainable parameters. </p><div class="fragment"><div class="line">template &lt;typename RNG, typename ParameterStore&gt;</div>
-<div class="line">std::unique_ptr&lt;Trace&gt; simulate(RNG&amp;, ParameterStore&amp;, const SimulateOptions&amp;) const</div>
-</div><!-- fragment --><p>See <a class="el" href="classgentl_1_1SimulateOptions.html">gentl::SimulateOptions</a>.</p>
-<p>Sample from an alternate distribution, and return an importance weight accounting for the difference, and optionally compute and cache gradients with respect to trainable parameters. </p><div class="fragment"><div class="line">template &lt;typename RNG, typename ParameterStore&gt;</div>
-<div class="line">std::pair&lt;std::unique_ptr&lt;Trace&gt;, double&gt; generate(RNG&amp;, ParameterStore&amp;, const ChoiceBuffer&amp;, const GenerateOptions&amp;) const</div>
-</div><!-- fragment --><p>See <a class="el" href="classgentl_1_1GenerateOptions.html">gentl::GenerateOptions</a>.</p>
-<p>There are two variants that write into a reference to a trace object instead of returning a new trace object:</p>
-<div class="fragment"><div class="line">template &lt;typename RNG, typename ParameterStore&gt;</div>
-<div class="line">void simulate(RNG&amp;, ParameterStore&amp;, const SimulateOptions&amp;, Trace&amp;) const</div>
-</div><!-- fragment --><p>Equivalent to <code>generate</code> but does not need to return a trace: </p><div class="fragment"><div class="line">template &lt;typename RNG, typename ParameterStore&gt;</div>
-<div class="line">double assess(RNG&amp;, ParameterStore&amp;, const ChoiceBuffer&amp;) const</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md3"></a>
-Trace</h2>
-<p>A possible sample from the probability distribution of a BoundGenerativeFunction.</p>
-<p>Traces typically do not have public constructors, and are instead obtained from the <code>simulate</code> and <code>generate</code> functions of a BoundGenerativeFunction.</p>
-<p>Member functions:</p>
-<p>Modify the state of a trace: </p><div class="fragment"><div class="line">template &lt;typename RNG&gt;</div>
-<div class="line">double update(RNG&amp;, const InputChange&amp;, const ForwardChoiceBuffer&amp;, const UpdateOptions&amp;)</div>
-</div><!-- fragment --><p>See <a class="el" href="classgentl_1_1UpdateOptions.html">gentl::UpdateOptions</a>. Note that <code>BackwardChoiceBuffer</code> and <code>ValueChange</code> references returned by <code>update</code> will become undefined after the next call to <code>update</code> or <code>revert</code> (below) or <code>fork</code> (below).</p>
-<p>Return the constraints, that, if passed to <code>update</code>, would revert the most recent <code>update</code> (only valid after a call to <code>update</code> and before a call to <code>revert</code> or <code>fork</code>): </p><div class="fragment"><div class="line">const ChoiceBuffer&amp; backward_constraints()</div>
-</div><!-- fragment --><p>Return an object representing the change in return value. </p><div class="fragment"><div class="line">const ValueChange&amp; return_value_change()</div>
-</div><!-- fragment --><p>Revert to the state before the most recent <code>update</code> call for which the <code>save</code> flag is set. </p><div class="fragment"><div class="line">void revert()</div>
-</div><!-- fragment --><p>Return a new trace that is observationally independent from <code>this</code>: </p><div class="fragment"><div class="line">std::unique_ptr&lt;Trace&gt; fork()</div>
-</div><!-- fragment --><p>Return a view into the value of some subset of the random choices in the trace: </p><div class="fragment"><div class="line">const ChoiceBuffer&amp; choices(const Selection&amp;) const</div>
-</div><!-- fragment --><p>NOTE: <a class="el" href="namespacegentl_1_1mcmc.html#acccc21e70c82487dcbfadda1de4dfaf9">gentl::mcmc::mh</a> requires that the proposal implement <code>choices(const gentl::selections:all)</code>.</p>
-<p>Return the log joint probability density: </p><div class="fragment"><div class="line">double score() const</div>
-</div><!-- fragment --><p>Return the return value of the trace, which is in general different from the choices. </p><div class="fragment"><div class="line">Output return_value() const</div>
-</div><!-- fragment --><p>Compute the gradient of the log joint density with respect to the parameters, and accumulate this gradient into the given GradientAccumulator object. </p><div class="fragment"><div class="line">void parameter_gradient(GradientAccumulator&amp;, double scaler=1.0)</div>
-</div><!-- fragment --><p>Compositional variant: </p><div class="fragment"><div class="line">InputGradient parameter_gradient(GradientAccumulator&amp;, const OutputGradient&amp;, double scaler=1.0)</div>
-</div><!-- fragment --><p>Return the gradient of the log joint density with respect to the choices: </p><div class="fragment"><div class="line">const ChoiceBuffer&amp; choice_gradient(const Selection&amp;)</div>
-</div><!-- fragment --><p>Compositional variant: </p><div class="fragment"><div class="line">std::pair&lt;InputGradient, const ChoiceBuffer&amp;&gt; choice_gradient(const Selection&amp;, const OutputGradient&amp;)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md4"></a>
-ChoiceBuffer</h2>
-<p>Stores the values of random choices.</p>
-<p>To support MALA and HMC, it must support the following elementwise arithmetic operators: <code>+</code>, <code>-</code>, <code>*</code> with an element of the same type as well as with <code>double</code>, <code>+=</code>, unary <code>-</code>.</p>
+Trace objects</h2>
+<p>Trace objects always record a distribution that they are associated with.</p>
+<ul>
+<li>The <a href="#score"><code>score</code></a> member function reports the joint density of the trace's sample under the trace's distribution.</li>
+<li>The <a href="#update"><code>update</code></a> member function can be used to change the distribution that a trace is associated with. It also reports the ratio of densities between a new and old trace. If the sample value for the original distribution does not uniquely specify a sample value for the new distribution, the function may perform sampling, and return an importance weight instead. The change to a distribution is represented by a change object.</li>
+<li>The <code>update</code> member function can also be used to modify the sample value stored in the trace so that it satisfies given constraints (a choice buffer), together with or independently of a change to the distribution.</li>
+<li>Trace objects may also store a value that is separate from their sample value, called the <b>return value</b>, which is accessible via the <a href="#return_value"><code>return_value</code></a> member function. The return value is a function of the sample value. After a call to <code>update</code>, the trace can be queried for a change object that represents the change to the return value (if any), via the <a href="#return_value_change"><code>return_value_change</code></a> member function.</li>
+<li>The effect of an <code>update</code> can be undone with the <a href="#revert"><code>revert</code></a> member function, if the <code>save</code> flag was set in the <code>update</code> options.</li>
+<li>A trace can be copied using the <a href="#fork"><code>fork</code></a> member function, which returns a unique pointer to a trace that is identical but independent from <code>this</code> trace from this point forward. A trace can also be forked from another trace of the same type, overwriting its contents with a copy of the contents of the other trace, via the <a href="#fork_from"><code>fork_from</code></a> member function.</li>
+<li>Trace objects support taking gradients of the log-density with respect to some component(s) of the random sample, via the <a href="#choice_gradient"><code>choice_gradient</code></a> member function, which optionally accepts a return value gradient to support compositional implementations based on reverse-mode automatic differentiation.</li>
+<li>Trace objects support taking gradients of the log-density with respect to learnable parameters, via the <a href="#parameter_gradient"><code>parameter_gradient</code></a> member function, which optionally accepts a return value gradient to support compositional implementations based on reverse-mode automatic differentiation, and optionally scales the gradients by some number before accumulating them into a provided gradient accumulator object.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Generative function objects</h2>
+<p>Generative function objects are callable objects that, when called on a single argument (called the <b>input</b>), return a distribution object.</p>
+<p>Generative functions are compositional building blocks of generative models that behave like mathematical functions (from their input to the return value of the trace that they generate), but they are stochastic (due to the random value of their sample). If you want your generative model to be resuable as a building block within other generative models, then you should implement a generative function for it. For models that are represented as generative functions, there is a dependency between the change objects that can be passed to the <code>update</code> function of a trace, and the set of valid inputs to the generative function from which the trace originated: <code>update</code> must accept change objects that encode a change of the input to the generative function to any valid input value.</p>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Interface documentation</h1>
+<p>This section describes the member functions that are expected by GenTL for user-defined types that represent distributions, traces, generative functions, and the other auxiliary types. The requirements that GenTL places on user-defined types are defined in <a class="el" href="concepts_8h.html">include/gentl/concepts.h</a> as C++20 <a href="https://en.wikipedia.org/wiki/Concepts_(C%2B%2B)">concepts</a> (they will not be checked by the compiler if the compiler does not support Concepts, but they still serve as documentation).</p>
 <h2><a class="anchor" id="autotoc_md5"></a>
-ChoiceSelection</h2>
-<p>A set of random choices.</p>
+Semantics</h2>
+<p>TODO: document encapsulated randomness</p>
+<p>$$ \def\ss{{\boldsymbol{\sigma}}} \def\uu{{\boldsymbol{\upsilon}}} \def\tt{{\boldsymbol{\tau}}} $$</p>
+<p>The semantics below assumes that samples are mathematical objects called <b>choice dictionaries</b>. (Note that some of the features in GenTL do not require that samples have this structure, but we document it here for concreteness.) A choice dictionary is a finite map from the <b>address</b> of a random choice to its <b>value</b>. See <a href="https://www.mct.dev/assets/mct-thesis.pdf">Chapter 2 and Chapter 4 of this PhD thesis</a> for a mathematical definition of generative functions and traces over choice dictionaries. We will assume that all random choices are discrete. We use the notation from that thesis below (we will denote choice dictionaries using the variables \(\tt\), \(\uu\), and \(\ss\), and a probability distribution on choice dictionaries is denoted \(p\), with probability density (mass) for dictionary \(\tt\) denoted \(p(\tt)\)). Also see the <a href="https://arxiv.org/abs/2007.09871">Involutive MCMC paper</a> for a formulation of choice dictionaries.</p>
 <h2><a class="anchor" id="autotoc_md6"></a>
-Change</h2>
-<p>A change to the input or output of a generative function.</p>
+Distribution interface member functions</h2>
+<p>Each distribution object is associated with some trace type, which we will call <code>Trace</code> in the documentation that follows. Note that GenTL does not contain any abstract class <code>Trace</code>.</p>
+<h4 id="simulate">simulate</h4>
+<div class="fragment"><div class="line">std::unique_ptr&lt;Trace&gt; simulate(RNG&amp; rng, ParameterStore&amp; params, const SimulateOptions&amp; options) const;</div>
+</div><!-- fragment --><p>Sample \( \tt \sim p \) and return a new trace object containing \(\tt\).</p>
+<p>There is also an in-place variant that over-writes an existing trace object:</p>
+<div class="fragment"><div class="line">void simulate(RNG&amp; rng, ParameterStore&amp; params, const SimulateOptions&amp; options, Trace&amp; trace) const;</div>
+</div><!-- fragment --><p>Also see <a class="el" href="classgentl_1_1SimulateOptions.html">gentl::SimulateOptions</a>.</p>
+<h4 id="generate">generate</h4>
+<div class="fragment"><div class="line">std::pair&lt;std::unique_ptr&lt;Trace&gt;, double&gt; simulate(RNG&amp; rng, ParameterStore&amp; params, const ChoiceBuffer&amp; constraint, const GenerateOptions&amp; options) const;</div>
+</div><!-- fragment --><p>Given constraint \( \ss \), sample \( \uu\sim q(\cdot; \ss) \) and return a new trace object containing \(\tt := \ss \oplus \uu\).</p>
+<p>There is also an in-place variant that over-writes an existing trace object:</p>
+<div class="fragment"><div class="line">double generate(RNG&amp; rng, ParameterStore&amp; params, const ChoiceBuffer&amp; constraint, const GenerateOptions&amp; options, Trace&amp; trace) const;</div>
+</div><!-- fragment --><p>Also see <a class="el" href="classgentl_1_1GenerateOptions.html">gentl::GenerateOptions</a>.</p>
 <h2><a class="anchor" id="autotoc_md7"></a>
-ParameterStore</h2>
-<p>Storage for parameters that support gradient-based learning. They maintain a current value for the parameters and a value for the gradient with respect to the parameters that is used by gradient-based learning algorithms including stochastic gradient descent.</p>
+Trace interface member functions</h2>
+<h4 id="score">score</h4>
+<div class="fragment"><div class="line">double score() const;</div>
+</div><!-- fragment --><p>Return \( \log p(\tt) \).</p>
+<h4 id="update">update</h4>
+<div class="fragment"><div class="line">double update(RNG&amp; rng, const Change&amp; change, const ChoiceBuffer&amp; constraint, const UpdateOptions&amp; options);</div>
+</div><!-- fragment --><p>TODO: document math</p>
+<p>Also see <a class="el" href="classgentl_1_1UpdateOptions.html">gentl::UpdateOptions</a>.</p>
+<p>The MCMC functionality in <a class="el" href="namespacegentl_1_1mcmc.html">gentl::mcmc</a> requires that an overload of <code>update</code> is provided for <code>Change</code> equal to <a class="el" href="structgentl_1_1change_1_1NoChange.html">gentl::change::NoChange</a>`.</p>
+<h4 id="return_value">return_value</h4>
+<div class="fragment"><div class="line">const Return&amp; return_value() const;</div>
+</div><!-- fragment --><p>Return \( f(\tt) \). The reference is invalidated by a subsequent call to <code>update</code> or <code>revert</code>.</p>
+<h4 id="return_value_change">return_value_change</h4>
+<div class="fragment"><div class="line">const ReturnChange&amp; return_value_change() const;</div>
+</div><!-- fragment --><p>The reference is invalidated by a subsequent call to <code>update</code> or <code>revert</code>.</p>
+<h4 id="revert">revert</h4>
+<div class="fragment"><div class="line">void revert();</div>
+</div><!-- fragment --><p>Undo an <code>update</code> for which the <code>save</code> flag option was set. Once reverted, a trace cannot be reverted again until after another call to <code>update</code>.</p>
+<h4 id="fork">fork</h4>
+<div class="fragment"><div class="line">std::unique_ptr&lt;Trace&gt; fork();</div>
+</div><!-- fragment --><p>Return a copy of the trace. Future updates to <code>this</code> do not effect the returned trace, and vice versa.</p>
+<h4 id="fork_from">fork_from</h4>
+<div class="fragment"><div class="line">void fork_from(const Trace&amp; other);</div>
+</div><!-- fragment --><p>Overwrite the contest of the <code>this</code> to contain a copy of the contents of <code>other</code>. Future updates to <code>this</code> do not effect the returned trace, and vice versa.</p>
+<h4 id="choice_gradient">choice_gradient</h4>
+<div class="fragment"><div class="line">const ChoiceBuffer&amp; choice_gradient(const Selection&amp; selection)</div>
+</div><!-- fragment --><p>Return a reference to a choice buffer containing the gradient of \(\log p(\tt)\) with respect to the values of the selected choices. The reference is invalidated by a subsequent call to <code>update</code> or <code>revert</code>.</p>
+<div class="fragment"><div class="line">InputGradient choice_gradient(const Selection&amp; selection, const RetGradient&amp;)</div>
+</div><!-- fragment --><p>Compositional variant designed for use with reverse-mode automatic differentiation.</p>
+<h4 id="parameter_gradient">parameter_gradient</h4>
+<div class="fragment"><div class="line">void parameter_gradient(GradientAccumulator&amp; accum, double scaler=1.0)</div>
+</div><!-- fragment --><p>Increment the gradient accumulator by \(\alpha \cdot \nabla_{\theta} \log p(\tt)\)where \(\alpha\) is the value of <code>scaler</code>.</p>
 <h2><a class="anchor" id="autotoc_md8"></a>
-ParameterGradientAccumulator</h2>
-<p>ParameterGradientAccumulators are constructed from a ParameterStore object. Separate ParameterGradientAccumulator objects can be used to accumulate gradients with respect to parameters in parallel.</p>
-<p>The following function accumulates the gradients of the source ParameterStore object (and resets the ParameterGradientAccumulator): </p><div class="fragment"><div class="line">void update_gradient()</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md9"></a>
+Generative function interface member functions</h2>
+<p>A generative function is an object that is callable for some input type, and then, when called with any value of its input type, returns a distribution that produces traces of a given fixed type.</p>
+<h2><a class="anchor" id="autotoc_md9"></a>
+Parameter store and gradient accumulator member functions</h2>
+<p>Parameter stores contain the state \(\theta\) of some learnable parameters and the state of their gradient. provide A parameter store type <code>Parameters</code> must provide <code>typename Parameters::accumulator_t</code>, and the accumulator type must have a constructor that takes a <code>Parameters</code> object as its only argument. The gradient values are initialized to zero, and are accumulated by calling the <code>update_gradient()</code> member function on a gradient accumulator object. The indirection between parameter stores and gradient accumulators is meant to facilitate multi-threaded gradient-based algorithms inwhich different threads accumulate gradients in parallel in thread-local gradient accumulators.</p>
+<h1><a class="anchor" id="autotoc_md10"></a>
 Functionality</h1>
-<h2><a class="anchor" id="autotoc_md10"></a>
+<p>Distribution, trace, and generative function types that implement the above interface (or certain subsets of the interface) can be used with the following GenTL features:</p>
+<h2><a class="anchor" id="autotoc_md11"></a>
 Modeling</h2>
-<h3><a class="anchor" id="autotoc_md11"></a>
+<p>GenTL contains some generic modeling constructs that can be used to compose more complex models from user-defined generative functions.</p>
+<h3><a class="anchor" id="autotoc_md12"></a>
 Sequential and Temporal Models</h3>
 <ul>
-<li><a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Model.html">gentl::modeling::sequence::Model</a></li>
-<li><a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html">gentl::modeling::sequence::Trace</a></li>
+<li>Distribution type <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Model.html">gentl::modeling::sequence::Model</a> (with associated trace type <a class="el" href="classgentl_1_1modeling_1_1sequence_1_1Trace.html">gentl::modeling::sequence::Trace</a>), that takes a user-defined generative function defining a transition kernel and gives a generative function that unrolls the kernel over a variable number of time steps.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md12"></a>
+<h2><a class="anchor" id="autotoc_md13"></a>
 Inference and Learning</h2>
-<h3><a class="anchor" id="autotoc_md13"></a>
+<p>GenTL also contains building blocks for high-level implementation of inference and learning algorithms using traces.</p>
+<h3><a class="anchor" id="autotoc_md14"></a>
 Markov chain Monte Carlo (MCMC)</h3>
 <ul>
 <li><a class="el" href="namespacegentl_1_1mcmc.html#acccc21e70c82487dcbfadda1de4dfaf9">gentl::mcmc::mh</a></li>
 <li><a class="el" href="namespacegentl_1_1mcmc.html#ab0fdc5761b6a8d61e00f98a7b4a68ace">gentl::mcmc::hmc</a></li>
 <li><a class="el" href="namespacegentl_1_1mcmc.html#ab984939fedfa2d2060ec60d05b7df42d">gentl::mcmc::mala</a></li>
 </ul>
-<h3><a class="anchor" id="autotoc_md14"></a>
+<h3><a class="anchor" id="autotoc_md15"></a>
 Sequential Monte Carlo (SMC)</h3>
 <ul>
 <li><a class="el" href="classgentl_1_1smc_1_1ParticleSystem.html">gentl::smc::ParticleSystem</a></li>
 </ul>
-<h3><a class="anchor" id="autotoc_md15"></a>
+<h3><a class="anchor" id="autotoc_md16"></a>
 Sampling importance resampling (SIR)</h3>
 <ul>
 <li><a class="el" href="namespacegentl_1_1sir.html#a8e7d92fc489e7e73b61cf17bd1f36066">gentl::sir::rolling_importance_resampling</a></li>
 </ul>
-<h3><a class="anchor" id="autotoc_md16"></a>
+<h3><a class="anchor" id="autotoc_md17"></a>
 Maximum likelihood</h3>
 <ul>
-<li><a class="el" href="namespacegentl_1_1sgd.html#ae1d745bdc12923e8a643eb1ed10de745">gentl::sgd::train_supervised</a></li>
+<li><a class="el" href="namespacegentl_1_1sgd.html#ae1d745bdc12923e8a643eb1ed10de745">gentl::sgd::train_supervised</a> </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md17"></a>
-Types</h1>
-<p><a class="el" href="structgentl_1_1change_1_1NoChange.html">gentl::change::NoChange</a> and singleton <a class="el" href="namespacegentl_1_1change.html#af9e0a130ba54ce86f03106389ad1ec7a">gentl::change::no_change</a></p>
-<p><a class="el" href="classgentl_1_1change_1_1UnknownChange.html">gentl::change::UnknownChange</a> </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
